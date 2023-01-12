@@ -1,0 +1,23 @@
+.button{
+    padding:0 1rem ;
+    width: 100%;
+}
+
+.cardHeader{
+    padding: 0 !important;
+}
+.cardImg{
+    max-height: 10rem;
+    width: 100%;
+    overflow: hidden;
+}
+.cardContent{
+    padding: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.cardButton{
+    padding: 0;
+    margin: 0;
+}

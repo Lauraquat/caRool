@@ -1,0 +1,7 @@
+{
+  "name": "caRool",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
