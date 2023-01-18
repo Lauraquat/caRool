@@ -1,29 +1,9 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonImg, IonCardSubtitle, IonToolbar, IonButton, IonCard, IonCardContent, IonItem, IonLabel, IonList, IonThumbnail } from '@ionic/react';
-import { useEffect, useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonImg, IonCardSubtitle, IonToolbar, IonButton, IonCard, IonCardContent, IonList } from '@ionic/react';
 
 import './style.css';
 
-type Character = {
-  id: number; 
-  name: string; 
-  image:string;
-  status:string;
-}
-
 const Home: React.FC = () => {
-  const [characters, setCharacters]= useState<Character[]>([]);
-   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((res) => res.json())
-      .then(
-      (apiResults) => {
-        setCharacters(apiResults.results);
-        console.log(characters[0])
-      },
-      (error) => {}
-      );
-    }, []);
-
+  
   return (
     <IonPage>
       <IonHeader>
