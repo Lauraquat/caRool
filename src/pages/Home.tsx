@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonImg, IonCardSubtitle, IonToolbar, IonButton, IonCard, IonCardContent, IonList } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonImg, IonCardSubtitle, IonToolbar, IonButtons, IonCard, IonCardContent, IonList } from '@ionic/react';
 
 import './style.css';
 
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       </IonHeader>
       <IonContent  fullscreen>
         <IonHeader collapse="condense">
-          <IonButton class='button'>Réserver un vélo</IonButton>
+          <IonButtons class='button'>Réserver un vélo</IonButtons>
           <IonToolbar>
             <IonTitle>Évènement à venir</IonTitle>
           </IonToolbar>
@@ -28,12 +28,11 @@ const Home: React.FC = () => {
                   <IonCardTitle>Card Title</IonCardTitle>
                   <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
                   Here's a small text description for the card content. Nothing more, nothing less.
-                  <IonButton class='cardButton'>En savoir +</IonButton>
+                  <IonButtons class='cardButton'>En savoir +</IonButtons>
 
                 </IonCardContent>
               </IonCard>
         </IonList>
-
       </IonContent>
     </IonPage>
     

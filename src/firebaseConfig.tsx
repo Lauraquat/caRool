@@ -1,10 +1,10 @@
 import 'firebase/app';
-import firebase from 'firebase/app';
+import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 import 'firebase/firestore';
-
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore/lite';
     
-export const config ={
+const firebaseConfig = {
     apiKey: "AIzaSyBIdRGfe7wDOSJlK9572Txqra4vNlNgNMo",
     authDomain: "ca-rool-52ff4.firebaseapp.com",
     databaseURL: "https://ca-rool-52ff4-default-rtdb.europe-west1.firebasedatabase.app",
@@ -13,9 +13,13 @@ export const config ={
     messagingSenderId: "393846467620",
     appId: "1:393846467620:web:ed1ee4a305a6450d7f7cb1",
     measurementId: "G-KR5RHY19SN"
-}
- export const app = firebase.initializeApp(config);
+  };
+  
+  // Initialize Firebase
+ const app = initializeApp(firebaseConfig);
  export const db = getFirestore(app);
+ 
+//   const analytics = getAnalytics(app);
 
 // export async function getEvent() {
 //     const eventCol = collection(db, 'event');
