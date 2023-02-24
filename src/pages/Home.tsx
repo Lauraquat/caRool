@@ -2,8 +2,9 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,Io
 
 import './style.css';
 
+
 const Home: React.FC = () => {
-  
+
   return (
     <IonPage>
       <IonHeader>
@@ -32,6 +33,7 @@ const Home: React.FC = () => {
                 </IonCardContent>
               </IonCard>
         </IonList>
+
       </IonContent>
     </IonPage>
     
