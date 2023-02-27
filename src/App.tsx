@@ -1,9 +1,10 @@
 import { Redirect, Route } from 'react-router-dom';
 import {  IonApp,  IonIcon,  IonLabel,  IonRouterOutlet,  IonTabBar,  IonTabButton,  IonTabs,  IonHeader,  IonToolbar,  setupIonicReact,  IonImg} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { calendar, square, home } from 'ionicons/icons';
+import { calendar, square, home, keySharp } from 'ionicons/icons';
 import Home from './pages/Home';
 import Event from './pages/Event';
+import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
 
 /* Core CSS required for Ionic components to work properly */
@@ -38,10 +39,13 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/home">
-            <Home />
+            <Home/>
           </Route>
           <Route exact path="/event">
             <Event />
+          </Route>
+          <Route path="/event/:id">
+            <EventDetail/>
           </Route>
           <Route path="/location">
             <Location />
@@ -51,17 +55,14 @@ const App: React.FC = () => (
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
+          <IonTabButton tab="home" href="/">
             <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="event" href="/event">
             <IonIcon icon={calendar} />
-            <IonLabel>Event</IonLabel>
           </IonTabButton>
           <IonTabButton tab="location" href="/location">
-            <IonIcon icon={square} />
-            <IonLabel>Location</IonLabel>
+            <IonIcon icon={keySharp} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
