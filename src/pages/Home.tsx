@@ -1,10 +1,36 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonImg, IonCardSubtitle, IonToolbar, IonButtons, IonCard, IonCardContent, IonList } from '@ionic/react';
+import { IonCard, IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { db } from '../firebaseConfig';
+import 'firebase/app';
+import 'firebase/firestore';
+
+import { dataEvents } from '../dataBdd';
 
 import './style.css';
 
 
 const Home: React.FC = () => {
+  const [events, setEvents] = useState<dataEvents[]>([]);
 
+    async function getEvents() {
+      const eventCol = collection(db, 'event');
+      const eventSnapshot = await getDocs(eventCol);
+      const eventLists = eventSnapshot.docs.map( doc => {
+        const event = doc.data() as dataEvents;
+        event.id = doc.id;
+        return event;
+      });
+      return eventLists ;
+    }
+    
+    useEffect(() => {
+      async function fetchEvents() {
+        const events = await getEvents();
+        setEvents(events);
+      }
+      fetchEvents();
+    }, []);
   return (
     <IonPage>
       <IonHeader>
@@ -13,25 +39,24 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent  fullscreen>
-        <IonHeader collapse="condense">
-          <IonButtons class='button'>Réserver un vélo</IonButtons>
-          <IonToolbar>
-            <IonTitle>Évènement à venir</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonList>
-              <IonCard>
-                <IonCardHeader class='cardHeader'>
-                  <IonImg class='cardImg' src='https://images.pexels.com/photos/161172/cycling-bike-trail-sport-161172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt=''></IonImg>
-                </IonCardHeader>
-                <IonCardContent class='cardContent'>
-                  <IonCardTitle>Card Title</IonCardTitle>
+          <IonButton class='mt-1 py-1'>Réserver un vélo</IonButton>
+            <IonToolbar>
+              <IonTitle class='py-1' >Évènement à venir</IonTitle>
+            </IonToolbar>
+        <IonList class='py-1'>
+          {events.map((event)=>  (
+            <IonCard key={event.id} routerLink={`/event/${event.id}`}>
+                <img src={event.photo} alt=''></img>
+                <IonCardHeader>
+                  <IonCardTitle>{event.titre}</IonCardTitle>
                   <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-                  Here's a small text description for the card content. Nothing more, nothing less.
-                  <IonButtons class='cardButton'>En savoir +</IonButtons>
-
-                </IonCardContent>
-              </IonCard>
+                </IonCardHeader>
+                <IonCardContent >
+                  {event.description}   
+                <IonButton class='cardButton'>En savoir +</IonButton>
+              </IonCardContent>
+            </IonCard>      
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

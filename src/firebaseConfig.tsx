@@ -18,12 +18,3 @@ const firebaseConfig = {
   // Initialize Firebase
  const app = initializeApp(firebaseConfig);
  export const db = getFirestore(app);
- 
-//   const analytics = getAnalytics(app);
-
-// export async function getEvent() {
-//     const eventCol = collection(db, 'event');
-//     const eventSnapshot = await getDocs(eventCol);
-//     const eventList = eventSnapshot.docs.map(doc => doc.data());
-//     return eventList
-//     }
