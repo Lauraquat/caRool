@@ -8,7 +8,6 @@ import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
 import Scan from './pages/Scan';
 import Register from './pages/Register';
-import Login from './pages/Login';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -78,22 +77,16 @@ const App: React.FC = () => (
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
           <Route exact path="/">
-            <Redirect to="/login" />
+            <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar id="app-tab-bar" slot="bottom">
-          <IonTabButton tab="home" href="/">
+          <IonTabButton tab="home" href="/event">
             <IonIcon icon={home} />
           </IonTabButton>
-          <IonTabButton tab="event" href="/event">
-            <IonIcon icon={calendar} />
-          </IonTabButton>
           <IonTabButton tab="location" href="/location">
-            <IonIcon icon={keySharp} />
+            <IonIcon icon={calendar} />
           </IonTabButton>
           <IonTabButton tab="scan" href="/scan">
             <IonIcon icon={square} />
