@@ -3,11 +3,13 @@ import { useState } from 'react';
 
 import './style.css';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { useHistory } from "react-router-dom";
 
 
 const Scan: React.FC = () => {
 
   const [qrCode, setQrCode] = useState('');
+  const navigate = useHistory();
   
   async function startScan() {
     // Vérifie la permission de la caméra sur le mobile
@@ -22,6 +24,8 @@ const Scan: React.FC = () => {
     if (result.hasContent) {
       setQrCode(result.content ?? 'Erreur de lecture du QRcode');
       console.log(result.content); //TODO vérifier que le contenu correspond à ce qu'on a généré en base lors de la réservation
+      //On redirige vers la page des events
+      navigate.push('/event');
     }
   };
 
