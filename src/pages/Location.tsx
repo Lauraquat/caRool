@@ -21,6 +21,8 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { apps, flash, send } from 'ionicons/icons';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 import './style.css';
 
@@ -44,6 +46,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 
 const Location: React.FC = () => {
+  let now = moment().format('YYYY-MM-DD');
+  let later = moment().add(3, 'months').format('YYYY-MM-DD'); 
+
+
   const {
     handleSubmit,
     control,
@@ -55,11 +61,13 @@ const Location: React.FC = () => {
     defaultValues: {
       genre: 'homme',
       type: 'VTT',
-    }
+    },
   });
 
   console.log(errors);
   console.log(getValues());
+  console.log(now);
+  console.log(later);
 
   /**
    *
@@ -125,7 +133,7 @@ const Location: React.FC = () => {
                     {...register('type', { required: true })}
                     defaultValue={getValues('type')}
                     onIonChange={e => setValue('type', e.detail.value)}
-                  >
+                    >
                     <IonItem
                       lines="none"
                       style={{
@@ -150,9 +158,10 @@ const Location: React.FC = () => {
               <div style={{ fontWeight: 'bold' }}>
                 Pour quand ?
               </div>
-              <IonDatetime 
-                min="2023-02-24T00:00:00"       //TODO COMMENT METTRE DATE DU JOUR (et max = date jour + 3 mois) ? + COMMENT METTRE HEURE?
-                max="2023-05-31T23:59:59"
+              <IonDatetime
+              //Restriction des dates du datepicker
+                min={now}
+                max={later}
                 presentation="date"
               >
               </IonDatetime>
