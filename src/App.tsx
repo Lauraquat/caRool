@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import {  IonApp,  IonIcon,  IonLabel,  IonRouterOutlet,  IonTabBar,  IonTabButton,  IonTabs,  IonHeader,  IonToolbar,  setupIonicReact,  IonImg} from '@ionic/react';
+import {  IonApp,  IonIcon,  IonRouterOutlet,  IonTabBar,  IonTabButton,  IonTabs,  IonHeader,  IonToolbar,  setupIonicReact,  IonImg} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { calendar, square, home, keySharp } from 'ionicons/icons';
 import Home from './pages/Home';
@@ -7,6 +7,8 @@ import Event from './pages/Event';
 import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
 import Scan from './pages/Scan';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -26,6 +28,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { userInfo } from 'os';
 
 setupIonicReact();
 
@@ -53,6 +56,12 @@ const App: React.FC = () => (
           </Route>
           <Route path="/scan">
             <Scan />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
