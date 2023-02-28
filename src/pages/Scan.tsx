@@ -22,7 +22,7 @@ const Scan: React.FC = () => {
       // Renvoie le résultat s'il existe (sinon renvoie une erreur)
       if (result.hasContent) {
         setQrCode(result.content ?? 'Erreur de lecture du QRcode');
-        console.log(result.hasContent); //TODO vérifier que le contenu correspond à ce qu'on a généré en base lors de la réservation
+        console.log(result.content); //TODO vérifier que le contenu correspond à ce qu'on a généré en base lors de la réservation
       }
     };
     startScan();
