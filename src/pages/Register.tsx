@@ -53,7 +53,7 @@ const Register: React.FC = () => {
             <IonButton expand="full" type="submit">Register</IonButton>
         </form>
       <p>Already have an account?
-        <Link to="/login">Login</Link>
+        <Link to="/home">Login</Link>
       </p>
       </IonContent>
       <IonToast

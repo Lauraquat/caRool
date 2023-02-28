@@ -14,19 +14,22 @@ import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import {hideTabBar} from "../App";
+import { useHistory } from "react-router-dom";
 
 const Home: React.FC = () => {
   hideTabBar();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showToast1, setShowToast1] = useState(false);
+  const navigate = useHistory();
 
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        setShowToast1(true)
+        setShowToast1(true);
+        navigate.push('/event')
       })
       .catch((error) => {
         console.error(error);
@@ -68,7 +71,7 @@ const Home: React.FC = () => {
           id="password"
           isOpen={showToast1}
           onDidDismiss={() => setShowToast1(false)}
-          message="Votre mot de passe ou votre e-mail est incorrect"
+          message="Bienvenu sur Ca Rool"
           duration={2000}
         />
         </IonContent>
