@@ -32,9 +32,27 @@ import { userInfo } from 'os';
 
 setupIonicReact();
 
+export const hideTabBar = (): void => {
+  const tabBar = document.getElementById('app-tab-bar');
+  const headerBar = document.getElementById('app-header-bar');
+  if (tabBar !== null && headerBar!== null) {
+    tabBar.style.display = 'none';
+    headerBar.style.display = 'none';
+  }
+};
+export const showTabBar = (): void => {
+  const tabBar = document.getElementById('app-tab-bar');
+  const headerBar = document.getElementById('app-header-bar');
+
+  if (tabBar !== null && headerBar!== null) {
+    tabBar.style.display = 'flex';
+    headerBar.style.display = 'flex';
+  }
+};
+
 const App: React.FC = () => (
   <IonApp>
-    <IonHeader>
+    <IonHeader id="app-header-bar">
         <IonToolbar>
           <IonImg class='logo' src='../../assets/icon/logo.svg' alt='logo ça Rool'></IonImg>
         </IonToolbar>
@@ -64,10 +82,10 @@ const App: React.FC = () => (
             <Login />
           </Route>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <Redirect to="/login" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        <IonTabBar id="app-tab-bar" slot="bottom">
           <IonTabButton tab="home" href="/">
             <IonIcon icon={home} />
           </IonTabButton>

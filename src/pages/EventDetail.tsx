@@ -8,8 +8,10 @@ import 'firebase/app';
 import 'firebase/firestore';
 
 import './style.css';
+import { showTabBar } from '../App';
 
 const EventDetail: React.FC = () => {
+  showTabBar();
   const { id } = useParams<{ id: string }>();
   const [event, setEvent] = useState<dataEvents>();
 

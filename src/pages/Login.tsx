@@ -8,34 +8,36 @@ import {
   IonInput,
   IonPage,
   IonTitle,
+  IonToast,
   IonToolbar,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-
+import {hideTabBar} from "../App";
 const Login: React.FC = () => {
+  hideTabBar();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showToast1, setShowToast1] = useState(false);
 
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        
+        setShowToast1(true)
       })
       .catch((error) => {
         console.error(error);
-        console.log('fonctionne pas')
+        console.log('fonctionne pas');
       });
   }
+
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
       </IonHeader>
       <IonContent>
         <form
@@ -45,8 +47,8 @@ const Login: React.FC = () => {
           }}
         >
           <IonInput
-            name="username"
-            placeholder="Username"
+            name="email"
+            placeholder="Email"
             onIonChange={(e: any) => setEmail(e.target.value)}
           />
           <IonInput
@@ -59,10 +61,17 @@ const Login: React.FC = () => {
             Login
           </IonButton>
         </form>
-      </IonContent>
-      <p>
-        New here ?<Link to="/register">register</Link>
-      </p>
+        <p>
+          New here ? <Link to="/register">Register</Link>
+        </p>
+        <IonToast
+          id="password"
+          isOpen={showToast1}
+          onDidDismiss={() => setShowToast1(false)}
+          message="Votre mot de passe ou votre e-mail est incorrect"
+          duration={2000}
+        />
+        </IonContent>
     </IonPage>
   );
 };

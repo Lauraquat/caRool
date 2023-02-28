@@ -4,13 +4,14 @@ import { collection, getDocs } from 'firebase/firestore/lite';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
 import 'firebase/firestore';
-
 import { dataEvents } from '../dataBdd';
+import { showTabBar } from '../App';
 
 import './style.css';
 
-
 const Event: React.FC = () => {
+  showTabBar();
+
   const [events, setEvents] = useState<dataEvents[]>([]);
 
     async function getEvents() {

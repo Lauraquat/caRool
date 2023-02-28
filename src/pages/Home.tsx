@@ -6,11 +6,13 @@ import 'firebase/app';
 import 'firebase/firestore';
 
 import { dataEvents } from '../dataBdd';
-
+import { showTabBar } from '../App';
 import './style.css';
 
 
 const Home: React.FC = () => {
+  showTabBar();
+
   const [events, setEvents] = useState<dataEvents[]>([]);
 
     async function getEvents() {
