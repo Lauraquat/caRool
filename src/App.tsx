@@ -39,6 +39,7 @@ export const hideTabBar = (): void => {
     headerBar.style.display = 'none';
   }
 };
+
 export const showTabBar = (): void => {
   const tabBar = document.getElementById('app-tab-bar');
   const headerBar = document.getElementById('app-header-bar');

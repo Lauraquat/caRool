@@ -7,17 +7,18 @@ import {
   IonHeader,
   IonInput,
   IonPage,
-  IonToast,
 } from "@ionic/react";
 
 import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import {hideTabBar} from "../App";
+import {hideTabBar, showTabBar} from "../App";
 import { useHistory } from "react-router-dom";
 
 const Home: React.FC = () => {
+
   hideTabBar();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showToast1, setShowToast1] = useState(false);
@@ -28,8 +29,8 @@ const Home: React.FC = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        setShowToast1(true);
-        navigate.push('/event')
+        navigate.push('/event');
+        showTabBar();
       })
       .catch((error) => {
         console.error(error);
@@ -67,13 +68,6 @@ const Home: React.FC = () => {
         <p>
           New here ? <Link to="/register">Register</Link>
         </p>
-        <IonToast
-          id="password"
-          isOpen={showToast1}
-          onDidDismiss={() => setShowToast1(false)}
-          message="Bienvenu sur Ca Rool"
-          duration={2000}
-        />
         </IonContent>
     </IonPage>
   );

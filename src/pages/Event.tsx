@@ -10,9 +10,8 @@ import { showTabBar } from '../App';
 import './style.css';
 
 const Event: React.FC = () => {
-  showTabBar();
-
   const [events, setEvents] = useState<dataEvents[]>([]);
+  showTabBar();
 
     async function getEvents() {
       const eventCol = collection(db, 'event');
@@ -32,6 +31,8 @@ const Event: React.FC = () => {
       }
       fetchEvents();
     }, []);
+
+
   return (
     <IonPage>
       <IonHeader>
