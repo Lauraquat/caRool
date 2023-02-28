@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Event from './pages/Event';
 import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
+import Scan from './pages/Scan';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -50,6 +51,9 @@ const App: React.FC = () => (
           <Route path="/location">
             <Location />
           </Route>
+          <Route path="/scan">
+            <Scan />
+          </Route>
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
@@ -63,6 +67,9 @@ const App: React.FC = () => (
           </IonTabButton>
           <IonTabButton tab="location" href="/location">
             <IonIcon icon={keySharp} />
+          </IonTabButton>
+          <IonTabButton tab="scan" href="/scan">
+            <IonIcon icon={square} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

@@ -35,7 +35,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <IonTitle>Event</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent  fullscreen>
@@ -65,5 +65,7 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
 
 

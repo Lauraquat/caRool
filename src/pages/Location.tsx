@@ -136,12 +136,8 @@ const Location: React.FC = () => {
                       <IonRadio slot="end" value="VTT" />
                     </IonItem>
                     <IonItem style={{ flexGrow: 2 }} lines="none">
-                      <IonLabel position="fixed">Vélo de ville</IonLabel>
-                      <IonRadio slot="end" value="ville" />
-                    </IonItem>
-                    <IonItem style={{ flexGrow: 2 }} lines="none">
-                      <IonLabel position="fixed">Vélo de course</IonLabel>
-                      <IonRadio slot="end" value="course" />
+                      <IonLabel position="fixed">VTC</IonLabel>
+                      <IonRadio slot="end" value="vtc" />
                     </IonItem>
                   </IonRadioGroup>
                 </div>
