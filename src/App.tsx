@@ -45,6 +45,9 @@ const App: React.FC = () => {
             <Route exact path="/">
               <Home/>
             </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
             </IonRouterOutlet>
       </IonReactRouter>
       </IonApp >
@@ -72,15 +75,21 @@ const App: React.FC = () => {
             <Route path="/scan">
               <Scan />
             </Route>
-            <Route path="/register">
-              <Register />
+            <Route exact path="/register">
+              <Redirect to="/event" />
+            </Route>
+            <Route exact path="/login">
+              <Redirect to="/event" />
+            </Route>
+            <Route exact path="/home">
+              <Redirect to="/event" />
             </Route>
             <Route exact path="/">
               <Redirect to="/event" />
             </Route>
           </IonRouterOutlet>
           <IonTabBar id="app-tab-bar" slot="bottom">
-            <IonTabButton tab="home" href="/home">
+            <IonTabButton tab="home" href="/event">
               <IonIcon icon={home} />
             </IonTabButton>
             <IonTabButton tab="location" href="/location">
