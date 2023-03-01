@@ -1,7 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 
 export interface dataEvents {
-    id : string;
+    id:string;
     description: string;
     photo: string;
     titre: string;
@@ -16,4 +16,26 @@ export interface dataEvents {
 
 export interface dataParam{
     id:string;
+}
+
+export interface dataBike{
+    id:string;
+    genre : string;
+    name: string;
+    type : string;
+}
+
+export interface dataReservations{
+    id : string;
+    startDate : Timestamp;
+    endDate  :Timestamp;
+    redue:boolean;
+    userId:string;
+    quantite:number;
+    genre:string;
+}
+
+export interface dataUsers{
+    id:string;
+    email:string;
 }

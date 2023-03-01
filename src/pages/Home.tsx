@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   function signInWithGoogle(){
     signInWithPopup( auth, providerGoogle)
     .then(() => {
-      navigate.push('/home');
+
     })
     .catch((error) => {
       console.log("echec");

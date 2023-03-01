@@ -30,13 +30,14 @@ import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
 import Login from './pages/Home';
+import LocationBis from './pages/LocationBis';
 
 setupIonicReact();
 
 const App: React.FC = () => {
 
   const user = useCurrentUser();
-  console.log(user)
+
   if(user === null){
     return(
       <IonApp >
@@ -72,6 +73,10 @@ const App: React.FC = () => {
             <Route path="/location">
               <Location />
             </Route>
+            <Route path="/locationBis">
+              <LocationBis />
+            </Route>
+
             <Route path="/scan">
               <Scan />
             </Route>

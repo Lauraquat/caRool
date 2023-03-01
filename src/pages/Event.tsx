@@ -30,7 +30,7 @@ const Event: React.FC = () => {
       fetchEvents();
     }, []);
 
-
+  console.log(events)
   return (
     <IonPage>
       <IonHeader>

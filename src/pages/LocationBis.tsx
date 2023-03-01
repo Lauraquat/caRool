@@ -49,7 +49,7 @@ import { dataReservations } from '../dataBdd';
 // import '@ionic/react/css/display.css';
 
 
-const Location: React.FC = () => {
+const LocationBis: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   let now = moment().format('YYYY-MM-DD');
   let later = moment().add(3, 'months').format('YYYY-MM-DD');
@@ -238,4 +238,4 @@ const Location: React.FC = () => {
   );
 };
 
-export default Location;
+export default LocationBis;
