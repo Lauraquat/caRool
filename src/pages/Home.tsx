@@ -1,75 +1,66 @@
-import "./style.css";
+import { IonCard, IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { db } from '../firebaseConfig';
+import 'firebase/app';
+import 'firebase/firestore';
+import { dataEvents } from '../dataBdd';
 
-import React, { useState, useEffect } from "react";
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonPage,
-} from "@ionic/react";
-
-import { Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
-import {hideTabBar, showTabBar} from "../App";
-import { useHistory } from "react-router-dom";
+import './style.css';
 
 const Home: React.FC = () => {
+  const [events, setEvents] = useState<dataEvents[]>([]);
 
-  hideTabBar();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showToast1, setShowToast1] = useState(false);
-  const navigate = useHistory();
-
-  function logIn() {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        navigate.push('/event');
-        showTabBar();
-      })
-      .catch((error) => {
-        console.error(error);
-        console.log('fonctionne pas');
+    async function getEvents() {
+      const eventCol = collection(db, 'event');
+      const eventSnapshot = await getDocs(eventCol);
+      const eventLists = eventSnapshot.docs.map( doc => {
+        const event = doc.data() as dataEvents;
+        event.id = doc.id;
+        return event;
       });
-  }
+      return eventLists ;
+    }
+    
+    useEffect(() => {
+      async function fetchEvents() {
+        const events = await getEvents();
+        setEvents(events);
+      }
+      fetchEvents();
+    }, []);
 
 
   return (
     <IonPage>
       <IonHeader>
+        <IonToolbar>
+          <IonTitle>Event</IonTitle>
+        </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            logIn();
-          }}
-        >
-          <IonInput
-            name="email"
-            placeholder="Email"
-            onIonChange={(e: any) => setEmail(e.target.value)}
-          />
-          <IonInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            onIonChange={(e: any) => setPassword(e.target.value)}
-          />
-          <IonButton expand="full" type="submit">
-            Login
-          </IonButton>
-        </form>
-        <p>
-          New here ? <Link to="/register">Register</Link>
-        </p>
-        </IonContent>
+      <IonContent  fullscreen>
+          <IonButton class='mt-1 py-1'>Réserver un vélo</IonButton>
+            <IonToolbar>
+              <IonTitle class='py-1' >Évènement à venir</IonTitle>
+            </IonToolbar>
+        <IonList class='py-1'>
+          {events.map((event)=>  (
+            <IonCard key={event.id} routerLink={`/event/${event.id}`}>
+                <img src={event.photo} alt=''></img>
+                <IonCardHeader>
+                  <IonCardTitle>{event.titre}</IonCardTitle>
+                  <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+                </IonCardHeader>
+                <IonCardContent >
+                  {event.description}
+                <IonButton class='cardButton'>En savoir +</IonButton>
+              </IonCardContent>
+            </IonCard>      
+          ))}
+        </IonList>
+      </IonContent>
     </IonPage>
+    
   );
 };
 
