@@ -2,11 +2,12 @@ import { Redirect, Route } from 'react-router-dom';
 import {  IonApp,  IonIcon,  IonRouterOutlet,  IonTabBar,  IonTabButton,  IonTabs,  IonHeader,  IonToolbar,  setupIonicReact,  IonImg} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { calendar, square, home, keySharp } from 'ionicons/icons';
-import Home from './pages/Home';
+import Event from './pages/Event';
 import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
 import Scan from './pages/Scan';
 import Register from './pages/Register';
+import Home from './pages/Home'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -28,7 +29,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
-import Login from './pages/Login';
+import Login from './pages/Home';
 
 setupIonicReact();
 
@@ -41,8 +42,8 @@ const App: React.FC = () => {
       <IonApp >
       <IonReactRouter>
           <IonRouterOutlet>
-            <Route exact path="/login">
-              <Login/>
+            <Route exact path="/">
+              <Home/>
             </Route>
             </IonRouterOutlet>
       </IonReactRouter>
@@ -59,8 +60,8 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/home">
-              <Home />
+            <Route exact path="/event">
+              <Event />
             </Route>
             <Route path="/event/:id">
               <EventDetail/>
@@ -75,7 +76,7 @@ const App: React.FC = () => {
               <Register />
             </Route>
             <Route exact path="/">
-              <Redirect to="/home" />
+              <Redirect to="/event" />
             </Route>
           </IonRouterOutlet>
           <IonTabBar id="app-tab-bar" slot="bottom">
