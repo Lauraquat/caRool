@@ -1,16 +1,18 @@
 import './style.css';
 
 import React, {useState, useEffect} from 'react';
-import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToast, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonToast} from '@ionic/react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../firebaseConfig';
+import { useHistory } from "react-router-dom";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCPassword] = useState('');
   const [showToast1, setShowToast1] = useState(false);
+  const navigate = useHistory();
 
   function register() {
     if(password === cpassword){
@@ -18,7 +20,7 @@ const Register: React.FC = () => {
         .then((userCredential) => {
               const user = userCredential.user;
               console.log(user);
-    
+              navigate.push('/login')
         })
         .catch((error) => {
           console.error(error);

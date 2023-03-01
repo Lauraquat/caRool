@@ -44,11 +44,13 @@ import '@ionic/react/css/typography.css';
 
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { showTabBar } from '../App';
 
 const Location: React.FC = () => {
+<<<<<<< HEAD
   showTabBar();
   const [selectedDate, setSelectedDate] = useState(new Date());
+=======
+>>>>>>> lea
   let now = moment().format('YYYY-MM-DD');
   let later = moment().add(3, 'months').format('YYYY-MM-DD');
 
