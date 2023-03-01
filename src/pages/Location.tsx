@@ -23,6 +23,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import { apps, flash, send } from "ionicons/icons";
 import moment from "moment";
 import "moment/locale/fr";
+import { hashRandom, hashString } from 'react-hash-string'
 
 import "./style.css";
 
@@ -73,7 +74,13 @@ const Location: React.FC = () => {
    */
   const onSubmit = (data: any) => {
     alert(JSON.stringify(data, null, 2));
+    let hashAcces = hashString("Nous avons bien pris en compte votre demande");
+    let hashResa = hashRandom();
+    console.log(hashAcces);
+    console.log(hashResa);
   };
+
+
   return (
     <IonApp>
       <IonPage>
