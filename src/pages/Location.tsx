@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   IonApp,
   IonBackButton,
@@ -17,22 +17,22 @@ import {
   IonRadio,
   IonSelect,
   IonSelectOption,
-  IonText
-} from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { apps, flash, send } from 'ionicons/icons';
-import moment from 'moment';
-import 'moment/locale/fr';
+  IonText,
+} from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { apps, flash, send } from "ionicons/icons";
+import moment from "moment";
+import "moment/locale/fr";
 
-import './style.css';
+import "./style.css";
 
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
 // import '@ionic/react/css/padding.css';
@@ -42,13 +42,12 @@ import '@ionic/react/css/typography.css';
 // import '@ionic/react/css/flex-utils.css';
 // import '@ionic/react/css/display.css';
 
-import { useForm, Controller } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
+import { useForm, Controller } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 const Location: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  let now = moment().format('YYYY-MM-DD');
-  let later = moment().add(3, 'months').format('YYYY-MM-DD');
+  let now = moment().format();
+  let later = moment().add(3, 'months').format();
 
   const {
     handleSubmit,
@@ -56,18 +55,17 @@ const Location: React.FC = () => {
     setValue,
     register,
     getValues,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     defaultValues: {
-      genre: 'homme',
-      type: 'VTT',
+      genre: "homme",
+      type: "VTT",
       date: now,
     },
   });
 
   console.log(errors);
   console.log(getValues());
-
 
   /**
    *
@@ -89,10 +87,9 @@ const Location: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <form onSubmit={handleSubmit(onSubmit)}>
-
             {/* SELECT DU NOMBRE DE VELO */}
             <IonItem>
-              <div style={{ marginRight: '20px', fontWeight: 'bold' }}>
+              <div style={{ marginRight: "20px", fontWeight: "bold" }}>
                 Combien de vélo(s) ?
               </div>
               <IonInput type="number" min="1" value="1"></IonInput>
@@ -100,12 +97,12 @@ const Location: React.FC = () => {
 
             {/* SELECT DU GENRE */}
             <IonItem>
-              <IonLabel style={{ fontWeight: 'bold' }}>Pour qui ?</IonLabel>
+              <IonLabel style={{ fontWeight: "bold" }}>Pour qui ?</IonLabel>
               <Controller
                 render={({ field }) => (
                   <IonSelect
                     value={field.value}
-                    onIonChange={e => setValue('genre', e.detail.value)}
+                    onIonChange={(e) => setValue("genre", e.detail.value)}
                   >
                     <IonSelectOption value="homme">Homme</IonSelectOption>
                     <IonSelectOption value="femme">Femme</IonSelectOption>
@@ -114,32 +111,33 @@ const Location: React.FC = () => {
                 )}
                 control={control}
                 name="genre"
-                rules={{ required: 'Merci de renseigner ce champ' }}
+                rules={{ required: "Merci de renseigner ce champ" }}
               />
             </IonItem>
             <ErrorMessage
               errors={errors}
               name="genre"
-              as={<div style={{ color: 'red' }} />}
+              as={<div style={{ color: "red" }} />}
             />
 
             {/* CHOIX DU TYPE DE VELO */}
             <IonItem>
               <IonText>
-                <div style={{ padding: 8, paddingLeft: 0, fontWeight: 'bold' }}>
+                <div style={{ padding: 8, paddingLeft: 0, fontWeight: "bold" }}>
                   Quel type ?
                 </div>
                 <div>
-                  <IonRadioGroup value="VTT"
-                    style={{ display: 'flex', width: '100%' }}
-                    {...register('type', { required: true })}
-                    defaultValue={getValues('type')}
-                    onIonChange={e => setValue('type', e.detail.value)}
+                  <IonRadioGroup
+                    value="VTT"
+                    style={{ display: "flex", width: "100%" }}
+                    {...register("type", { required: true })}
+                    defaultValue={getValues("type")}
+                    onIonChange={(e) => setValue("type", e.detail.value)}
                   >
                     <IonItem
                       lines="none"
                       style={{
-                        flexGrow: 2
+                        flexGrow: 2,
                       }}
                     >
                       <IonLabel position="fixed">VTT</IonLabel>
@@ -159,21 +157,22 @@ const Location: React.FC = () => {
 
             {/* SELECT DE LA DATE */}
             <IonItem>
-              <div style={{ fontWeight: 'bold' }}>
-                Pour quand ?
-              </div>
+              <div style={{ fontWeight: "bold" }}>Pour quand ?</div>
             </IonItem>
             <IonDatetime
               //Restriction des dates du datepicker
               min={now}
               max={later}
-              presentation="date"
-              defaultValue={getValues('date')}
+              presentation="date-time"
+              defaultValue={getValues("date")}
+              
               // onIonChange={e => setValue('date', e.detail.value)}
-
+              onIonChange={(e) => {
+                setValue("date", e.detail.value as string);
+              }}
             >
+              <span slot="time-label">Heure</span>
             </IonDatetime>
-
 
             {/* SOUMISSION DU FORMULAIRE */}
             <div>
