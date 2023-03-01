@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   IonApp,
   IonBackButton,
@@ -48,8 +48,9 @@ import { showTabBar } from '../App';
 
 const Location: React.FC = () => {
   showTabBar();
+  const [selectedDate, setSelectedDate] = useState(new Date());
   let now = moment().format('YYYY-MM-DD');
-  let later = moment().add(3, 'months').format('YYYY-MM-DD'); 
+  let later = moment().add(3, 'months').format('YYYY-MM-DD');
 
   const {
     handleSubmit,
@@ -62,13 +63,13 @@ const Location: React.FC = () => {
     defaultValues: {
       genre: 'homme',
       type: 'VTT',
+      date: now,
     },
   });
 
   console.log(errors);
   console.log(getValues());
-  console.log(now);
-  console.log(later);
+
 
   /**
    *
@@ -90,13 +91,15 @@ const Location: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <form onSubmit={handleSubmit(onSubmit)}>
-          
-          <IonItem>
-            <div style={{marginRight:'20px', fontWeight: 'bold' }}>
-              Combien de vélo(s) ?
-            </div>
-            <IonInput type="number" min="1" value="1"></IonInput>  
-          </IonItem>
+
+            {/* SELECT DU NOMBRE DE VELO */}
+            <IonItem>
+              <div style={{ marginRight: '20px', fontWeight: 'bold' }}>
+                Combien de vélo(s) ?
+              </div>
+              <IonInput type="number" min="1" value="1"></IonInput>
+            </IonItem>
+
             {/* SELECT DU GENRE */}
             <IonItem>
               <IonLabel style={{ fontWeight: 'bold' }}>Pour qui ?</IonLabel>
@@ -129,12 +132,12 @@ const Location: React.FC = () => {
                   Quel type ?
                 </div>
                 <div>
-                  <IonRadioGroup
+                  <IonRadioGroup value="VTT"
                     style={{ display: 'flex', width: '100%' }}
                     {...register('type', { required: true })}
                     defaultValue={getValues('type')}
                     onIonChange={e => setValue('type', e.detail.value)}
-                    >
+                  >
                     <IonItem
                       lines="none"
                       style={{
@@ -155,18 +158,26 @@ const Location: React.FC = () => {
             {errors.type && (
               <span className="error-msg">Merci de renseigner ce champ</span>
             )}
+
+            {/* SELECT DE LA DATE */}
             <IonItem>
               <div style={{ fontWeight: 'bold' }}>
                 Pour quand ?
               </div>
-              <IonDatetime
-              //Restriction des dates du datepicker
-                min={now}
-                max={later}
-                presentation="date"
-              >
-              </IonDatetime>
             </IonItem>
+            <IonDatetime
+              //Restriction des dates du datepicker
+              min={now}
+              max={later}
+              presentation="date"
+              defaultValue={getValues('date')}
+              // onIonChange={e => setValue('date', e.detail.value)}
+
+            >
+            </IonDatetime>
+
+
+            {/* SOUMISSION DU FORMULAIRE */}
             <div>
               <IonButton type="submit">Valider</IonButton>
             </div>
