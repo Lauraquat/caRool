@@ -23,7 +23,6 @@ const Home: React.FC = () => {
   function signInWithGoogle(){
     signInWithPopup( auth, providerGoogle)
     .then(() => {
-
     })
     .catch((error) => {
       console.log("echec");
@@ -34,14 +33,15 @@ const Home: React.FC = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate.push('/home');
+        //todo setuser in bdd
       })
       .catch((error) => {
         console.error(error);
         console.log('fonctionne pas');
       });
   }
-
+ 
+  
 
   return (
     <IonPage>
