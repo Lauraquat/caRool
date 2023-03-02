@@ -1,6 +1,6 @@
 import "./style.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -11,8 +11,9 @@ import {
 
 import { Link } from "react-router-dom";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { useHistory } from "react-router-dom";
+import { collection, addDoc } from 'firebase/firestore/lite';
 
 const Home: React.FC = () => {
 
@@ -39,9 +40,7 @@ const Home: React.FC = () => {
         console.error(error);
         console.log('fonctionne pas');
       });
-  }
- 
-  
+  }  
 
   return (
     <IonPage>
