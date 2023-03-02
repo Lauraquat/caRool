@@ -7,7 +7,11 @@ import EventDetail from './pages/EventDetail';
 import Location from './pages/Location';
 import Scan from './pages/Scan';
 import Register from './pages/Register';
-import Home from './pages/Home'
+import Home from './pages/Home';
+import Login from './pages/Home';
+import ScanConfirmation from './pages/ScanConfirmation';
+import ResaConfirmation from './pages/ResaConfirmation';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -29,7 +33,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
-import Login from './pages/Home';
 
 setupIonicReact();
 
@@ -74,6 +77,12 @@ const App: React.FC = () => {
             </Route>
             <Route path="/scan">
               <Scan />
+            </Route>
+            <Route path="/scanConfirmation">
+              <ScanConfirmation />
+            </Route>
+            <Route path="/resaConfirmation">
+              <ResaConfirmation />
             </Route>
             <Route exact path="/register">
               <Redirect to="/event" />

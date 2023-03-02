@@ -45,11 +45,12 @@ import "@ionic/react/css/typography.css";
 
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useHistory } from "react-router-dom";
 
 const Location: React.FC = () => {
   let now = moment().format();
   let later = moment().add(3, "months").format();
-
+  const navigate = useHistory();
   const {
     handleSubmit,
     control,
@@ -77,6 +78,7 @@ const Location: React.FC = () => {
     alert(JSON.stringify(data, null, 2));
     let hashAcces = hashString("Nous avons bien pris en compte votre demande");
     let hashResa = hashRandom();
+    navigate.push("/resaConfirmation");
     console.log(hashAcces);
     console.log(hashResa);
   };
@@ -94,6 +96,7 @@ const Location: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <form onSubmit={handleSubmit(onSubmit)}>
+
             {/* SELECT DE LA DATE */}
             <IonItem>
               <div style={{ fontWeight: "bold" }}>
