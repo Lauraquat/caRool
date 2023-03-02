@@ -27,8 +27,8 @@ export interface dataBike{
 
 export interface dataReservations{
     id : string;
-    startDate : Timestamp;
-    endDate  :Timestamp;
+    startDate : string;
+    endDate  : string;
     redue:boolean;
     userId:string;
     quantite:number;
@@ -39,9 +39,4 @@ export interface dataReservations{
 export interface dataUsers{
     id:string;
     email:string;
-}
-
-export interface dataCodes{
-    id:string;
-    code:string;
 }

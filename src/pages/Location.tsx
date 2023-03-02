@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   IonApp,
   IonBackButton,
@@ -17,8 +17,8 @@ import {
   IonRadio,
   IonSelect,
   IonSelectOption,
-  IonText
-} from '@ionic/react';
+  IonText,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { apps, flash, send } from "ionicons/icons";
 import moment from "moment";
@@ -31,9 +31,9 @@ import "./style.css";
 import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
 
 /* Optional CSS utils that can be commented out */
 // import '@ionic/react/css/padding.css';
@@ -43,18 +43,18 @@ import '@ionic/react/css/typography.css';
 // import '@ionic/react/css/flex-utils.css';
 // import '@ionic/react/css/display.css';
 
-import { useForm, Controller } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
+import { useForm, Controller } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import { useHistory } from "react-router-dom";
 
-import { db } from '../firebaseConfig';
-import { dataReservations } from '../dataBdd';
-import 'firebase/firestore';
-import { collection, addDoc, getDocs } from 'firebase/firestore/lite';
+import { db } from "../firebaseConfig";
+import { dataReservations } from "../dataBdd";
+import "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore/lite";
 
 const Location: React.FC = () => {
-  let now = moment().format();
-  let later = moment().add(3, "months").format();
+  let now = moment().format("YYYY-MM-DD");
+  let later = moment().add(3, "months").format("YYYY-MM-DD");
   const navigate = useHistory();
   const {
     handleSubmit,
@@ -87,19 +87,18 @@ const Location: React.FC = () => {
     console.log(hashAcces);
     console.log(hashResa);
     addReservations();
-    
   };
 
   const [reservations, setReservations] = useState<dataReservations[]>([]);
-  const [genre, setGenre] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [typeBike, setTypeBike] = useState('vtt');
+  const [genre, setGenre] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [typeBike, setTypeBike] = useState("vtt");
 
   async function getReservations() {
-    const resaCol = collection(db, 'reservation');
+    const resaCol = collection(db, "reservation");
     const resaSnapshot = await getDocs(resaCol);
-    const resaLists = resaSnapshot.docs.map( doc => {
+    const resaLists = resaSnapshot.docs.map((doc) => {
       const reservation = doc.data() as dataReservations;
       reservation.id = doc.id;
       return reservation;
@@ -115,21 +114,21 @@ const Location: React.FC = () => {
   }, []);
 
   async function addReservations() {
-      try {
-          const docRef = await addDoc(collection(db, "reservation"), {
-              genre,
-              quantite:1,
-              startDate,
-              endDate,
-              typeBike,
-              rendu:false
-          });
-          console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-          console.error("Error adding document: ", e);
-      }
+    try {
+      const docRef = await addDoc(collection(db, "reservation"), {
+        genre,
+        quantite: 1,
+        startDate,
+        endDate,
+        typeBike,
+        rendu: false,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   }
-  
+
   return (
     <IonApp>
       <IonPage>
@@ -143,7 +142,7 @@ const Location: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           <form onSubmit={handleSubmit(onSubmit)}>
-
+            
             {/* SELECT DE LA DATE */}
             <IonItem>
               <div style={{ fontWeight: "bold" }}>
@@ -154,17 +153,15 @@ const Location: React.FC = () => {
               //Restriction des dates du datepicker
               min={now}
               max={later}
-              presentation="date-time"
+              presentation="date"
               defaultValue={getValues("date")}
-              onIonChange={(e:any) => {
-                setEndDate(e.target.value)
+              onIonChange={(e: any) => {
+                setStartDate(e.target.value);
                 setValue("date", e.detail.value as string);
               }}
-            >
-              <span slot="time-label">Heure</span>
-            </IonDatetime>
-            
-              {/* SELECT DU NOMBRE DE VELO */}
+            ></IonDatetime>
+
+            {/* SELECT DU NOMBRE DE VELO */}
             {/* <IonItem>
                 <div style={{ marginRight: "20px", fontWeight: "bold" }}>
                   Combien de vélo(s) ?
