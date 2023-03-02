@@ -40,3 +40,8 @@ export interface dataUsers{
     id:string;
     email:string;
 }
+
+export interface dataCodes{
+    id:string;
+    code:string;
+}

@@ -87,6 +87,7 @@ const Location: React.FC = () => {
     console.log(hashAcces);
     console.log(hashResa);
     addReservations();
+    
   };
 
   const [reservations, setReservations] = useState<dataReservations[]>([]);
@@ -114,7 +115,6 @@ const Location: React.FC = () => {
   }, []);
 
   async function addReservations() {
-      console.log('test');
       try {
           const docRef = await addDoc(collection(db, "reservation"), {
               genre,
