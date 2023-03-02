@@ -33,6 +33,7 @@ export interface dataReservations{
     userId:string;
     quantite:number;
     genre:string;
+    typeBike:string;
 }
 
 export interface dataUsers{

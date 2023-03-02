@@ -19,10 +19,6 @@ import {
   IonSelectOption,
   IonText
 } from '@ionic/react';
-import { useForm, Controller } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import 'firebase/firestore';
-import { collection, addDoc, getDocs } from 'firebase/firestore/lite';
 import { IonReactRouter } from "@ionic/react-router";
 import { apps, flash, send } from "ionicons/icons";
 import moment from "moment";
@@ -38,8 +34,6 @@ import "@ionic/react/css/core.css";
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
-import { db } from '../firebaseConfig';
-import { dataReservations } from '../dataBdd';
 
 /* Optional CSS utils that can be commented out */
 // import '@ionic/react/css/padding.css';
@@ -48,6 +42,14 @@ import { dataReservations } from '../dataBdd';
 // import '@ionic/react/css/text-transformation.css';
 // import '@ionic/react/css/flex-utils.css';
 // import '@ionic/react/css/display.css';
+
+import { useForm, Controller } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+
+import { db } from '../firebaseConfig';
+import { dataReservations } from '../dataBdd';
+import 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore/lite';
 
 const Location: React.FC = () => {
   let now = moment().format();
@@ -62,9 +64,9 @@ const Location: React.FC = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      number: "1",
+      // number: "1",
       gender: "homme",
-      type: "VTT",
+      type: "vtt",
       date: now,
     },
   });
@@ -89,8 +91,7 @@ const Location: React.FC = () => {
   const [genre, setGenre] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [type, setType] = useState('');
-
+  const [typeBike, setTypeBike] = useState('vtt');
 
   async function getReservations() {
     const resaCol = collection(db, 'reservation');
@@ -118,7 +119,7 @@ const Location: React.FC = () => {
               quantite:1,
               startDate,
               endDate,
-              type,
+              typeBike,
               rendu:false
           });
           console.log("Document written with ID: ", docRef.id);
@@ -152,28 +153,29 @@ const Location: React.FC = () => {
               max={later}
               presentation="date-time"
               defaultValue={getValues("date")}
-              onIonChange={(e) => {
+              onIonChange={(e:any) => {
+                setEndDate(e.target.value)
                 setValue("date", e.detail.value as string);
               }}
             >
               <span slot="time-label">Heure</span>
             </IonDatetime>
-
-            {/* SELECT DU NOMBRE DE VELO */}
+            
+              {/* SELECT DU NOMBRE DE VELO */}
             {/* <IonItem>
-              <div style={{ marginRight: "20px", fontWeight: "bold" }}>
-                Combien de vélo(s) ?
-              </div>
-              <IonInput
-                type="number"
-                min="1"
-                value="1"
-                onIonChange={(e) => {
-                  setValue("number", e.detail.value as string);
-                  //VERIFIER LE NOMBRE DE VELO RESTANTS A LA DATE DONNEE + alerte si pas assez
-                }}
-              ></IonInput>
-            </IonItem> */}
+                <div style={{ marginRight: "20px", fontWeight: "bold" }}>
+                  Combien de vélo(s) ?
+                </div>
+                <IonInput
+                  type="number"
+                  min="1"
+                  value="1"
+                  onIonChange={(e) => {
+                    setValue("number", e.detail.value as string);
+                    //VERIFIER LE NOMBRE DE VELO RESTANTS A LA DATE DONNEE + alerte si pas assez
+                  }}
+                ></IonInput>
+              </IonItem> */}
 
             {/* SELECT DU GENRE */}
             <IonItem>
@@ -182,7 +184,7 @@ const Location: React.FC = () => {
                 render={({ field }) => (
                   <IonSelect
                     value={field.value}
-                    onIonChange={(e : any) => {
+                    onIonChange={(e) => {
                       setGenre(e.target.value);
                       setValue("gender", e.detail.value);
                       //VERIFIER LE NOMBRE DE VELO RESTANTS POUR CE GENRE A LA DATE DONNEE + alerte si pas assez
@@ -212,13 +214,14 @@ const Location: React.FC = () => {
                 </div>
                 <div>
                   <IonRadioGroup
-                    value="VTT"
+                    value={typeBike}
                     style={{ display: "flex", width: "100%" }}
-                    {...register("type", { required: true })}
-                    defaultValue={getValues("type")}
-                    onIonChange={(e:any) => {
-                      setType(e.target.value);
-                      setValue("type", e.detail.value);
+                    // {...register("type", { required: true })}
+                    // defaultValue={getValues("type")}
+
+                    onIonChange={(e) => {
+                      // setValue("type", e.detail.value);
+                      setTypeBike(e.target.value);
                       //VERIFIER LE NOMBRE DE VELO RESTANTS  DE CE TYPE + alerte si pas assez
                     }}
                   >
@@ -229,7 +232,7 @@ const Location: React.FC = () => {
                       }}
                     >
                       <IonLabel position="fixed">VTT</IonLabel>
-                      <IonRadio slot="end" value="VTT" />
+                      <IonRadio slot="end" value="vtt" />
                     </IonItem>
                     <IonItem style={{ flexGrow: 2 }} lines="none">
                       <IonLabel position="fixed">VTC</IonLabel>
