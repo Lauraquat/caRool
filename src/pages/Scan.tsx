@@ -17,15 +17,15 @@ const Scan: React.FC = () => {
   const user = useCurrentUser();
 
 
-  console.log('user');
-  console.log(user);
+  // console.log('user');
+  // console.log(user);
 
   async function getResas() {
     const resaCol = collection(db, "reservation");
     const resaSnapshot = await getDocs(resaCol);
     const resaLists = resaSnapshot.docs.map((doc) => {
       const resa = doc.data() as dataReservations;
-      resa.userId = doc.id;
+      resa.id = doc.id;
       return resa;
     });
     return resaLists;
@@ -47,16 +47,29 @@ const Scan: React.FC = () => {
       const resas = await getResas();
       const today = moment().format("YYYY-MM-DD");
 
+      
       //On cherche toutes les résa qui ont une startDate correspondante à today
       const currentResa = resas.find((resa) => resa.startDate === today)
+      
       
       console.log('currentResa');
       console.log(currentResa);
 
-      
+      if(currentResa){
+        console.log('result.content');
+        console.log(result.content);
+        console.log('currentResa.hashResa');
+        console.log(currentResa.hashResa);
+        console.log('currentResa.userId');
+        console.log(currentResa.userId);
+        console.log('user?.uid');
+        console.log(user?.uid);
+      }
+
+      // On vérifie qu'il y a bien des réservations sur la journée
       if (!currentResa || (result.content != currentResa.hashResa) || currentResa.userId != user?.uid ) {
         navigate.push("/scanFailed");
-      }else if (result.content == currentResa.hashResa && currentResa.rendu === false && currentResa.userId == user?.uid){
+      }else if (result.content == currentResa.hashResa && currentResa.rendu == false && currentResa.userId == user?.uid){
         //On redirige vers la page de confirmation
         navigate.push("/scanConfirmation");
       }

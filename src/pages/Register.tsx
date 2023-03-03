@@ -22,7 +22,7 @@ const Register: React.FC = () => {
         .then((userCredential) => {
               const user = userCredential.user;
               addUserRegister(user);
-              console.log(user);
+              // console.log(user);
         })
         .catch((error) => {
           console.error(error);

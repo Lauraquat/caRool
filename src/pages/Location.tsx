@@ -95,7 +95,6 @@ const Location: React.FC = () => {
   const [hashEnter, setHashEnter] = useState(hashString("Nous avons bien pris en compte votre demande").toString());
 
   const user = useCurrentUser();
-  console.log(user?.uid);
   const [userId, setUserId] = useState(user?.uid);
 
   async function getReservations() {

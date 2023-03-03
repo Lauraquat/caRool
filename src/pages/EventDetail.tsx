@@ -16,12 +16,12 @@ const EventDetail: React.FC = () => {
   useEffect(() => {
     async function getEvent() {
       const eventDoc = doc(db, 'event', id);
-      console.log(eventDoc)
+      // console.log(eventDoc)
       const eventSnapshot = await getDoc(eventDoc);
       if (!eventSnapshot.exists) {
         // const eventData = eventSnapshot.data() as dataEvents;
         // setEvent(eventData);
-        console.log('test');
+        // console.log('test');
       }
       setEvent(eventSnapshot.data() as dataEvents)
     }
