@@ -60,3 +60,10 @@ ion-list{
 .mt-5 {
     margin-top: 5rem;
 }
+.logoUser{
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    width: 2.7rem;
+    transform: translate(0, -50%);
+}

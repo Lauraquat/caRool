@@ -29,6 +29,7 @@ return(
             </IonToolbar>
         </IonHeader>
         <IonContent>
+            <IonButton href="./mesresa">Voir mes reservations</IonButton>
             <IonButton onClick={logOut}>LogOut</IonButton>
         </IonContent>
     </IonPage>
