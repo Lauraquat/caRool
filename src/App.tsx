@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import User from './pages/User';
 import ScanConfirmation from './pages/ScanConfirmation';
 import ResaConfirmation from './pages/ResaConfirmation';
+import MesResa from './pages/MesResa';
+import ScanFailed from './pages/scanFailed';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -33,7 +35,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
-import MesResa from './pages/MesResa';
 
 setupIonicReact();
 
@@ -87,6 +88,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/scanConfirmation">
               <ScanConfirmation />
+            </Route>
+            <Route path="/scanFailed">
+              <ScanFailed />
             </Route>
             <Route path="/resaConfirmation">
               <ResaConfirmation />

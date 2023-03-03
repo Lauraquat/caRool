@@ -9,10 +9,16 @@ import { db } from "../firebaseConfig";
 import { dataReservations } from "../dataBdd";
 import { isEmpty } from "@firebase/util";
 import moment from "moment";
+import { useCurrentUser } from '../hooks/UserHook';
 
 const Scan: React.FC = () => {
   const [qrCode, setQrCode] = useState("");
   const navigate = useHistory();
+  const user = useCurrentUser();
+
+
+  console.log('user');
+  console.log(user);
 
   async function getResas() {
     const resaCol = collection(db, "reservation");
@@ -37,22 +43,22 @@ const Scan: React.FC = () => {
     // Renvoie le résultat s'il existe (sinon renvoie une erreur)
     if (result.hasContent) {
       setQrCode(result.content ?? "Erreur de lecture du QRcode");
-      console.log(result.content); //TODO vérifier que le contenu correspond à ce qu'on a généré en base lors de la réservation
 
       const resas = await getResas();
+      const today = moment().format("YYYY-MM-DD");
 
-      const array = resas.map((resa) => {
-        const startDate = moment(resa.startDate).format("YYYY-MM-DD");
-        const today = moment().format("YYYY-MM-DD");
+      //On cherche toutes les résa qui ont une startDate correspondante à today
+      const currentResa = resas.find((resa) => resa.startDate === today)
+      
+      console.log('currentResa');
+      console.log(currentResa);
 
-        if (startDate === today /* && ("test2" ==  resa.code) */) {
-          //On redirige vers la page de confirmation
-          navigate.push("/scanConfirmation");
-        }
-      });
-
-      if (isEmpty(array)) {
-        console.log("il n'a pas de réservation pour ce jour");
+      
+      if (!currentResa || (result.content != currentResa.hashResa) || currentResa.userId != user?.uid ) {
+        navigate.push("/scanFailed");
+      }else if (result.content == currentResa.hashResa && currentResa.rendu === false && currentResa.userId == user?.uid){
+        //On redirige vers la page de confirmation
+        navigate.push("/scanConfirmation");
       }
     }
   }

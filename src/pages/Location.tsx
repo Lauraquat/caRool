@@ -54,8 +54,8 @@ import { collection, addDoc, getDocs } from "firebase/firestore/lite";
 import { useCurrentUser } from "../hooks/UserHook";
 
 const Location: React.FC = () => {
-  let now = moment().format("YYYY-MM-DD");
-  let later = moment().add(3, "months").format("YYYY-MM-DD");
+  const now = moment().format("YYYY-MM-DD");
+  const later = moment().add(3, "months").format("YYYY-MM-DD");
   const navigate = useHistory();
   const {
     handleSubmit,
@@ -81,20 +81,18 @@ const Location: React.FC = () => {
    * @param data
    */
   const onSubmit = (data: any) => {
-    alert(JSON.stringify(data, null, 2));
-    let hashAcces = hashString("Nous avons bien pris en compte votre demande");
-    let hashResa = hashRandom();
+    alert(JSON.stringify(data, null, 2)); 
     navigate.push("/resaConfirmation");
-    console.log(hashAcces);
-    console.log(hashResa);
     addReservations();
   };
 
   const [reservations, setReservations] = useState<dataReservations[]>([]);
-  const [genre, setGenre] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [genre, setGenre] = useState("homme");
+  const [startDate, setStartDate] = useState(now);
   const [endDate, setEndDate] = useState("");
   const [typeBike, setTypeBike] = useState("vtt");
+  const [hashResa, setHashResa] = useState(hashRandom().toString());
+  const [hashEnter, setHashEnter] = useState(hashString("Nous avons bien pris en compte votre demande").toString());
 
   const user = useCurrentUser();
   console.log(user?.uid);
@@ -128,6 +126,8 @@ const Location: React.FC = () => {
         typeBike,
         rendu: false,
         userId : user?.uid,
+        hashResa,
+        hashEnter,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
