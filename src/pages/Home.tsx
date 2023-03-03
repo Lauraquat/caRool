@@ -14,12 +14,14 @@ import { GoogleAuthProvider,FacebookAuthProvider, signInWithEmailAndPassword, si
 import { auth, db } from "../firebaseConfig";
 import { useHistory } from "react-router-dom";
 import { collection, addDoc } from 'firebase/firestore/lite';
+import { useCurrentUser } from "../hooks/UserHook";
 
 const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const providerGoogle = new GoogleAuthProvider();
   const providerFacebook = new FacebookAuthProvider();
+
   function signInWithFacebook(){
     signInWithPopup( auth, providerFacebook)
     .then(() => {

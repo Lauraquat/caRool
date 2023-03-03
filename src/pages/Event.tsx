@@ -14,7 +14,7 @@ const Event: React.FC = () => {
 
   const [events, setEvents] = useState<dataEvents[]>([]);
   const [usersBdd, setUsers] = useState<dataUsers[]>([]);
-
+  
     async function getEvents() {
       const eventCol = collection(db, 'event');
       const eventSnapshot = await getDocs(eventCol);
