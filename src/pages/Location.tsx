@@ -63,6 +63,7 @@ const Location: React.FC = () => {
     setValue,
     register,
     getValues,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -73,15 +74,11 @@ const Location: React.FC = () => {
     },
   });
 
-  // console.log(errors);
-  // console.log(getValues());
-
   /**
    *
    * @param data
    */
   const onSubmit = (data: any) => {
-    alert(JSON.stringify(data, null, 2)); 
     navigate.push("/resaConfirmation");
     addReservations();
   };
@@ -159,7 +156,7 @@ const Location: React.FC = () => {
               min={now}
               max={later}
               presentation="date"
-              defaultValue={getValues("date")}
+              value={startDate}
               onIonChange={(e: any) => {
                 setStartDate(e.target.value);
                 setValue("date", e.detail.value as string);
@@ -188,7 +185,7 @@ const Location: React.FC = () => {
               <Controller
                 render={({ field }) => (
                   <IonSelect
-                    value={field.value}
+                    value={genre}
                     onIonChange={(e) => {
                       setGenre(e.target.value);
                       setValue("gender", e.detail.value);
@@ -253,7 +250,7 @@ const Location: React.FC = () => {
 
             {/* SOUMISSION DU FORMULAIRE */}
             <div>
-              <IonButton type="submit">Valider</IonButton>
+              <IonButton type="submit" onClick={()=>{setGenre("homme"); setTypeBike("vtt"); setStartDate(now);}}>Valider</IonButton>
             </div>
           </form>
         </IonContent>
