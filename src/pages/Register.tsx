@@ -5,21 +5,23 @@ import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonToast} from '@i
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { auth, db } from '../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore/lite';
-
+import { collection, addDoc , doc, setDoc} from 'firebase/firestore/lite';
+import { useCurrentUser } from '../hooks/UserHook';
 
 const Register: React.FC = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCPassword] = useState('');
   const [showToast1, setShowToast1] = useState(false);
+  const user = useCurrentUser();
 
   function register() {
     if(password === cpassword){
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
               const user = userCredential.user;
-              addUserRegister();
+              addUserRegister(user);
               console.log(user);
         })
         .catch((error) => {
@@ -30,14 +32,24 @@ const Register: React.FC = () => {
         setShowToast1(true)
     }
 
-    async function addUserRegister() {
+    async function addUserRegister(user:any) {
       try {
-          const docRef = await addDoc(collection(db, "users"), {
+          console.log(user?.uid);
+          if(user){
+            console.log('ok')
+            await setDoc(doc(db, "users", user.uid),{
               email,
-          });
-          console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-          console.error("Error adding document: ", e);
+            })
+            console.log("Document written with ID: ", user.uid);
+          }
+        } catch (e) {
+            console.error("Error adding document: ", e);
+
+          
+          // const res = await db.collection('cities').doc('LA').set({data})
+          // const docRef = await addDoc(collection(db, "users"), {
+          //     email,
+          // });
       }
   }
   

@@ -48,9 +48,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useHistory } from "react-router-dom";
 
 import { db } from "../firebaseConfig";
-import { dataReservations } from "../dataBdd";
+import { dataReservations, dataUsers } from "../dataBdd";
 import "firebase/firestore";
 import { collection, addDoc, getDocs } from "firebase/firestore/lite";
+import { useCurrentUser } from "../hooks/UserHook";
 
 const Location: React.FC = () => {
   let now = moment().format("YYYY-MM-DD");
@@ -95,6 +96,10 @@ const Location: React.FC = () => {
   const [endDate, setEndDate] = useState("");
   const [typeBike, setTypeBike] = useState("vtt");
 
+  const user = useCurrentUser();
+  console.log(user?.uid);
+  const [userId, setUserId] = useState(user?.uid);
+
   async function getReservations() {
     const resaCol = collection(db, "reservation");
     const resaSnapshot = await getDocs(resaCol);
@@ -122,6 +127,7 @@ const Location: React.FC = () => {
         endDate,
         typeBike,
         rendu: false,
+        userId : user?.uid,
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
