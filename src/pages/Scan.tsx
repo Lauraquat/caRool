@@ -7,18 +7,12 @@ import { useHistory } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
 import { dataReservations } from "../dataBdd";
-import { isEmpty } from "@firebase/util";
 import moment from "moment";
-import { useCurrentUser } from '../hooks/UserHook';
+import { getAuth } from "@firebase/auth";
 
 const Scan: React.FC = () => {
   const [qrCode, setQrCode] = useState("");
   const navigate = useHistory();
-  const user = useCurrentUser();
-
-
-  // console.log('user');
-  // console.log(user);
 
   async function getResas() {
     const resaCol = collection(db, "reservation");
@@ -32,6 +26,9 @@ const Scan: React.FC = () => {
   }
 
   async function startScan() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
     // Vérifie la permission de la caméra sur le mobile
     await BarcodeScanner.checkPermission({ force: true });
 
@@ -47,29 +44,21 @@ const Scan: React.FC = () => {
       const resas = await getResas();
       const today = moment().format("YYYY-MM-DD");
 
-      
       //On cherche toutes les résa qui ont une startDate correspondante à today
-      const currentResa = resas.find((resa) => resa.startDate === today)
-      
-      
-      console.log('currentResa');
-      console.log(currentResa);
-
-      if(currentResa){
-        console.log('result.content');
-        console.log(result.content);
-        console.log('currentResa.hashResa');
-        console.log(currentResa.hashResa);
-        console.log('currentResa.userId');
-        console.log(currentResa.userId);
-        console.log('user?.uid');
-        console.log(user?.uid);
-      }
+      const currentResa = resas.find((resa) => resa.startDate === today);
 
       // On vérifie qu'il y a bien des réservations sur la journée
-      if (!currentResa || (result.content != currentResa.hashResa) || currentResa.userId != user?.uid ) {
+      if (
+        !currentResa ||
+        result.content != currentResa.hashResa ||
+        currentResa.userId != user?.uid
+      ) {
         navigate.push("/scanFailed");
-      }else if (result.content == currentResa.hashResa && currentResa.rendu == false && currentResa.userId == user?.uid){
+      } else if (
+        result.content == currentResa.hashResa &&
+        currentResa.rendu == false &&
+        currentResa.userId == user?.uid
+      ) {
         //On redirige vers la page de confirmation
         navigate.push("/scanConfirmation");
       }
