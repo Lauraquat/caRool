@@ -7,8 +7,6 @@ import { useHistory } from "react-router-dom";
 
 
 const User: React.FC = () => {
-    const user = useCurrentUser();
-    console.log(user?.email);
     const navigate = useHistory();
 
     function logOut(){

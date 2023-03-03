@@ -10,17 +10,24 @@ import {
 } from "@ionic/react";
 
 import { Link } from "react-router-dom";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider,FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { useHistory } from "react-router-dom";
 import { collection, addDoc } from 'firebase/firestore/lite';
 
 const Home: React.FC = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useHistory();
   const providerGoogle = new GoogleAuthProvider();
+  const providerFacebook = new FacebookAuthProvider();
+  function signInWithFacebook(){
+    signInWithPopup( auth, providerFacebook)
+    .then(() => {
+    })
+    .catch((error) => {
+      console.log("echec");
+    })
+   }
   function signInWithGoogle(){
     signInWithPopup( auth, providerGoogle)
     .then(() => {
@@ -69,8 +76,11 @@ const Home: React.FC = () => {
           </IonButton>
         </form>
         <IonButton onClick={signInWithGoogle} expand="full" type="submit">
-            Se connecter avec google
-          </IonButton>
+          Se connecter avec google
+        </IonButton>
+        <IonButton onClick={signInWithFacebook} expand="full" type="submit">
+          Se connecter avec facebook
+        </IonButton>
         <p>
           New here ? <Link to="/register">Register</Link>
         </p>
