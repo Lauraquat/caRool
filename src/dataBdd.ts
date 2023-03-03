@@ -29,11 +29,13 @@ export interface dataReservations{
     id : string;
     startDate : string;
     endDate  : string;
-    redue:boolean;
+    rendu:boolean;
     userId:string;
     quantite:number;
     genre:string;
     typeBike:string;
+    hashEnter:string;
+    hashResa:string;
 }
 
 export interface dataUsers{

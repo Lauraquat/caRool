@@ -33,6 +33,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
+import ScanFailed from './pages/scanFailed';
 
 setupIonicReact();
 
@@ -80,6 +81,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/scanConfirmation">
               <ScanConfirmation />
+            </Route>
+            <Route path="/scanFailed">
+              <ScanFailed />
             </Route>
             <Route path="/resaConfirmation">
               <ResaConfirmation />
