@@ -40,7 +40,6 @@ const Home: React.FC = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // console.log(user);
         //todo setuser in bdd
       })
       .catch((error) => {

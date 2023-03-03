@@ -22,7 +22,6 @@ const Register: React.FC = () => {
         .then((userCredential) => {
               const user = userCredential.user;
               addUserRegister(user);
-              // console.log(user);
         })
         .catch((error) => {
           console.error(error);
@@ -34,9 +33,7 @@ const Register: React.FC = () => {
 
     async function addUserRegister(user:any) {
       try {
-          console.log(user?.uid);
           if(user){
-            console.log('ok')
             await setDoc(doc(db, "users", user.uid),{
               email,
             })

@@ -59,8 +59,8 @@ const Scan: React.FC = () => {
         currentResa.rendu == false &&
         currentResa.userId == user?.uid
       ) {
-        //On redirige vers la page de confirmation
-        navigate.push("/scanConfirmation");
+        //On redirige vers la page des options
+        navigate.push("/scanOptions");
       }
     }
   }

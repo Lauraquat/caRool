@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
-const ScanConfirmation: React.FC = () => {
+const ScanOptions: React.FC = () => {
     const navigate = useHistory();
 
   return (
@@ -23,4 +23,4 @@ const ScanConfirmation: React.FC = () => {
   );
 };
 
-export default ScanConfirmation;
+export default ScanOptions;

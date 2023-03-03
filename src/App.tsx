@@ -9,7 +9,7 @@ import Scan from './pages/Scan';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import User from './pages/User';
-import ScanConfirmation from './pages/ScanConfirmation';
+import ScanOptions from './pages/ScanOptions';
 import ResaConfirmation from './pages/ResaConfirmation';
 import MesResa from './pages/MesResa';
 import ScanFailed from './pages/scanFailed';
@@ -86,8 +86,8 @@ const App: React.FC = () => {
             <Route path="/scan">
               <Scan />
             </Route>
-            <Route path="/scanConfirmation">
-              <ScanConfirmation />
+            <Route path="/scanOptions">
+              <ScanOptions />
             </Route>
             <Route path="/scanFailed">
               <ScanFailed />
