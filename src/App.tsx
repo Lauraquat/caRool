@@ -33,6 +33,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
+import MesResa from './pages/MesResa';
 
 setupIonicReact();
 
@@ -72,14 +73,17 @@ const App: React.FC = () => {
             <Route path="/event/:id">
               <EventDetail/>
             </Route>
+            <Route path="/user">
+              <User/>
+            </Route>
+            <Route path="/mesresa">
+              <MesResa/>
+            </Route>
             <Route path="/location">
               <Location />
             </Route>
             <Route path="/scan">
               <Scan />
-            </Route>
-            <Route path="/user">
-              <User/>
             </Route>
             <Route path="/scanConfirmation">
               <ScanConfirmation />
