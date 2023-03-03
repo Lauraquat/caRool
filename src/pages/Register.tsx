@@ -4,23 +4,23 @@ import React, {useState, useEffect} from 'react';
 import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonToast} from '@ionic/react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { auth } from '../firebaseConfig';
-import { useHistory } from "react-router-dom";
+import { auth, db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore/lite';
+
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCPassword] = useState('');
   const [showToast1, setShowToast1] = useState(false);
-  const navigate = useHistory();
 
   function register() {
     if(password === cpassword){
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
               const user = userCredential.user;
+              addUserRegister();
               console.log(user);
-              navigate.push('/login')
         })
         .catch((error) => {
           console.error(error);
@@ -30,6 +30,17 @@ const Register: React.FC = () => {
         setShowToast1(true)
     }
 
+    async function addUserRegister() {
+      try {
+          const docRef = await addDoc(collection(db, "users"), {
+              email,
+          });
+          console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+          console.error("Error adding document: ", e);
+      }
+  }
+  
 }    
   return (
     <IonPage>
@@ -69,3 +80,4 @@ const Register: React.FC = () => {
 }
 
 export default Register; 
+

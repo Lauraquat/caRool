@@ -8,7 +8,7 @@ import Location from './pages/Location';
 import Scan from './pages/Scan';
 import Register from './pages/Register';
 import Home from './pages/Home';
-import Login from './pages/Home';
+import User from './pages/User';
 import ScanConfirmation from './pages/ScanConfirmation';
 import ResaConfirmation from './pages/ResaConfirmation';
 
@@ -77,6 +77,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/scan">
               <Scan />
+            </Route>
+            <Route path="/user">
+              <User/>
             </Route>
             <Route path="/scanConfirmation">
               <ScanConfirmation />
