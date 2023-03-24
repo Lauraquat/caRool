@@ -8,7 +8,6 @@ export function useCurrentUser(){
     useEffect(() => {
       onAuthStateChanged(auth, user => {
       setUser(user);
-    //   console.log(user);
       })
     }, [])
     return user;
