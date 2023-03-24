@@ -4,14 +4,9 @@ import { dataReservations } from "../dataBdd";
 import React, { useEffect, useState } from "react";
 
 import "./style.css";
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, getDocs, query, where } from "firebase/firestore/lite";
+
 import { db } from "../firebaseConfig";
 
 const ScanOptions: React.FC = ({ route }: any) => {
@@ -30,22 +25,20 @@ const ScanOptions: React.FC = ({ route }: any) => {
       where("hashResa", "==", hashResa)
     );
 
-    console.log("retour");
+    // console.log("retour");  //ko
 
 
-    // getDocs(retourVelo)
-    //   .then((querySnapshot) => {
-    //     const resaId = querySnapshot.docs[0].id;
+    getDocs(retourVelo)
+      .then((querySnapshot) => {
+        const resaId = querySnapshot.docs[0].id;
 
-    //     console.log("resaId", resaId);
+        console.log("resaId", resaId);
 
-    //     return updateDoc(doc(db, "reservation", resaId), {
-    //       rendu: true,
-    //     });
-    //   })
-    //   .then(() => {
-    //     "Votre vélo a bien été rendu";
-    //   });
+        return updateDoc(doc(db, "reservation", resaId), "rendu", true);
+      })
+      .then(() => {
+        "Votre vélo a bien été rendu";
+      });
   }
 
   return (
