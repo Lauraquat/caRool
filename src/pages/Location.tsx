@@ -48,12 +48,15 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useHistory } from "react-router-dom";
 
 import { db } from "../firebaseConfig";
-import { dataReservations, dataUsers } from "../dataBdd";
+import { dataReservations } from "../dataBdd";
 import "firebase/firestore";
-import { collection, addDoc, getDocs } from "firebase/firestore/lite";
+import firebase from "firebase/app";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore/lite";
 import { useCurrentUser } from "../hooks/UserHook";
 
+
 const Location: React.FC = () => {
+  const [resas, setResas] = useState<dataReservations[]>([]);
   const now = moment().format("YYYY-MM-DD");
   const later = moment().add(3, "months").format("YYYY-MM-DD");
   const navigate = useHistory();
@@ -77,10 +80,43 @@ const Location: React.FC = () => {
   /**
    *
    * @param data
-   */
+  */
   const onSubmit = (data: any) => {
-    navigate.push("/resaConfirmation");
-    addReservations();
+      // récuperation des données des résa non rendues pour la date, le type de vélo et le genre demandé
+    //   async function getResas() {
+    //     const resas = query(collection(db, "reservation"), where("startDate", "==", "2023-03-29" & "rendu", "==", false & "genre", "==", "femme" & "typeBike", "==", "vtc" ));
+    //     const resasSnapshot = await getDocs(resas);
+    //     const resasList = resasSnapshot.docs.map( doc => {
+    //       const resa = doc.data() as dataReservations;
+    //       resa.id = doc.id;
+    //       return resa;
+    //     });
+    //     return resasList;
+    //   }
+
+    //   useEffect(() => {
+    //     async function fetchResas() {
+    //       const resas = await getResas();
+    //       setResas(resas);
+    //     }
+
+    //     fetchResas();
+    //   }, []);
+      
+
+      
+    //   //récupération du stock
+    //   // const stock = query(collection(db, "velo.stock"), where("genre", "==", "femme" & "typeBike", "==", "vtc"));
+    //   const stock = 6;
+
+    //   //comparaison du stock et du nombre de résa
+    //    if(resas.length < stock){
+        addReservations();
+        navigate.push("/resaConfirmation");
+    //   }else{
+    //      navigate.push("/resaError");
+    //   }
+
   };
 
   const [reservations, setReservations] = useState<dataReservations[]>([]);
@@ -160,6 +196,8 @@ const Location: React.FC = () => {
               onIonChange={(e: any) => {
                 setStartDate(e.target.value);
                 setValue("date", e.detail.value as string);
+
+                //VERIFIER LE NOMBRE DE VELO RESTANTS A LA DATE DONNEE + alerte si pas assez
               }}
             ></IonDatetime>
 
@@ -258,5 +296,6 @@ const Location: React.FC = () => {
     </IonApp>
   );
 };
+
 
 export default Location;
