@@ -104,7 +104,6 @@ const Location: React.FC = () => {
 
   
   useEffect(() => {
-    console.log("test", startDate, genre, typeBike);
     const nbBikes = query(collection(db, "velo"), where("genre", "==", genre), where("type", "==", typeBike));
     getDocs(nbBikes).then((querySnapshot) => {
       
@@ -186,7 +185,6 @@ const Location: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
 
-        <p>Nombre de vélo disponible pour ce choix : {numberOfBikes}</p>
 
 
           <form onSubmit={handleSubmit(onSubmit)}>
