@@ -1,13 +1,14 @@
 import { IonButton, IonPage, IonContent, IonHeader } from "@ionic/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { dataReservations } from "../dataBdd";
 
 import "./style.css";
 
 const ScanOptions: React.FC = ({route}:any) => {
-    const {hashResa} = route.params
     //si trouve pas route l'ajouter quelque pars dans app.tsx
     const navigate = useHistory();
-    console.log(hashResa);
+    const location = useLocation<dataReservations>(); 
+    const hashResa = location.state?.hashResa;
 
   return (
     //Page de redirection après validation d'un QR code valide
@@ -40,6 +41,7 @@ const ScanOptions: React.FC = ({route}:any) => {
       >
         Retourner à l'accueil
       </IonButton>
+      <p>Hash de la réservation : {hashResa}</p>
       </IonContent>
     </IonPage>
   );
