@@ -1,7 +1,7 @@
+import "./style.css";
+
 import { IonPage, useIonViewDidEnter } from "@ionic/react";
 import { useState } from "react";
-
-import "./style.css";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
 import { useHistory } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore/lite";
@@ -25,6 +25,7 @@ const Scan: React.FC = () => {
     return resaLists;
   }
 
+  //Affichage du scanner à QRcode
   async function startScan() {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -44,10 +45,10 @@ const Scan: React.FC = () => {
       const resas = await getResas();
       const today = moment().format("YYYY-MM-DD");
 
-      //On cherche toutes les résa qui ont une startDate correspondante à today
+      //On cherche toutes les réservations qui ont une startDate correspondante à today
       const currentResa = resas.find((resa) => resa.startDate === today);
 
-      // On vérifie qu'il y a bien des réservations sur la journée
+      // On vérifie s'il y a une réservation pour le user sur la journée
       if (
         !currentResa ||
         result.content != currentResa.hashResa ||
@@ -60,7 +61,7 @@ const Scan: React.FC = () => {
         currentResa.userId == user?.uid
       ) {
         //On redirige vers la page des options
-        navigate.push("/scanOptions", {hashResa : currentResa.hashResa} );
+        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
       }
     }
   }

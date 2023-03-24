@@ -1,11 +1,10 @@
+import "./style.css";
+
 import { IonButton, IonPage } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
-
-import "./style.css";
-
 const ScanFailed: React.FC = () => {
-    const navigate = useHistory();
+  const navigate = useHistory();
 
   return (
     //Page de redirection après validation d'un QR code invalide
@@ -14,7 +13,7 @@ const ScanFailed: React.FC = () => {
       <IonButton
         onClick={(e) => {
           e.preventDefault();
-          navigate.push('/home');
+          navigate.push("/home");
         }}
       >
         Retourner à l'accueil

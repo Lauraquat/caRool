@@ -1,36 +1,37 @@
-import { IonButton, IonPage, IonHeader, IonContent} from "@ionic/react";
+import { IonButton, IonPage, IonHeader, IonContent } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-
 
 import "./style.css";
 
 const RetourVelo: React.FC = () => {
-    const navigate = useHistory();
+  const navigate = useHistory();
 
   return (
-    //Page de redirection après validation d'un QR code valide
+    //Page de redirection après validation d'un QR code valide pour rendre le vélo
     <IonPage>
-        <IonHeader>
-        </IonHeader>
-        <IonContent>
-            <p>Merci d'avoir utiliser caRool nous esperons que vous avez passer un bon moment et vous revoir bientot bisous </p>
-            <IonButton
-                onClick={(e) => {
-                e.preventDefault();
-                navigate.push('/home');
-                }}
-            >
-                Retourner à l'accueil
-            </IonButton>
-            <IonButton
-                onClick={(e) => {
-                e.preventDefault();
-                navigate.push('/location');
-                }}
-            >
-                Faire une nouvelle reservation
-            </IonButton>
-        </IonContent>
+      <IonHeader></IonHeader>
+      <IonContent>
+        <p>
+          Merci d'avoir utilisé caRool. Nous espérons que vous avez passé un bon
+          moment et vous revoir bientôt ! Bisous {/***** VRAIMENT??? *****/}
+        </p>
+        <IonButton
+          onClick={(e) => {
+            e.preventDefault();
+            navigate.push("/home");
+          }}
+        >
+          Retourner à l'accueil
+        </IonButton>
+        <IonButton
+          onClick={(e) => {
+            e.preventDefault();
+            navigate.push("/location");
+          }}
+        >
+          Faire une nouvelle réservation
+        </IonButton>
+      </IonContent>
     </IonPage>
   );
 };

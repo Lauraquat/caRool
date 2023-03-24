@@ -8,13 +8,14 @@ import {
   IonInput,
   IonPage,
 } from "@ionic/react";
-
 import { Link } from "react-router-dom";
-import { GoogleAuthProvider,FacebookAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, db } from "../firebaseConfig";
-import { useHistory } from "react-router-dom";
-import { collection, addDoc } from 'firebase/firestore/lite';
-import { useCurrentUser } from "../hooks/UserHook";
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 const Home: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -22,38 +23,36 @@ const Home: React.FC = () => {
   const providerGoogle = new GoogleAuthProvider();
   const providerFacebook = new FacebookAuthProvider();
 
-  function signInWithFacebook(){
-    signInWithPopup( auth, providerFacebook)
-    .then(() => {
-    })
-    .catch((error) => {
-      console.log("echec");
-    })
-   }
-  function signInWithGoogle(){
-    signInWithPopup( auth, providerGoogle)
-    .then(() => {
-    })
-    .catch((error) => {
-      console.log("echec");
-    })
-   }
+  function signInWithFacebook() {
+    signInWithPopup(auth, providerFacebook)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+        alert("Erreur lors de l'authentification avec facebook");
+      });
+  }
+  function signInWithGoogle() {
+    signInWithPopup(auth, providerGoogle)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+        alert("Erreur lors de l'authentification avec google");
+      });
+  }
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        //todo setuser in bdd
       })
       .catch((error) => {
         console.error(error);
-        console.log('fonctionne pas');
+        alert("Erreur lors de l'authentification avec le mail");
       });
-  }  
+  }
 
   return (
     <IonPage>
-      <IonHeader>
-      </IonHeader>
+      <IonHeader></IonHeader>
       <IonContent>
         <form
           onSubmit={(e) => {
@@ -73,7 +72,7 @@ const Home: React.FC = () => {
             onIonChange={(e: any) => setPassword(e.target.value)}
           />
           <IonButton expand="full" type="submit">
-            Login
+            Se connecter
           </IonButton>
         </form>
         <IonButton onClick={signInWithGoogle} expand="full" type="submit">
@@ -83,9 +82,9 @@ const Home: React.FC = () => {
           Se connecter avec facebook
         </IonButton>
         <p>
-          New here ? <Link to="/register">Register</Link>
+          Pas encore inscrit ? <Link to="/register">S'inscrire</Link>
         </p>
-        </IonContent>
+      </IonContent>
     </IonPage>
   );
 };
