@@ -60,7 +60,7 @@ const Scan: React.FC = () => {
         currentResa.userId == user?.uid
       ) {
         //On redirige vers la page des options
-        navigate.push("/scanOptions");
+        navigate.push("/scanOptions", {hashResa : currentResa.hashResa} );
       }
     }
   }

@@ -32,41 +32,8 @@ const Event: React.FC = () => {
         setEvents(events);
         // setUsers(usersBdd);
       }
-
       fetchEvents();
     }, []);
-
-    // useEffect(() => {
-    //     const verifMail = usersBdd.some( (element) => element.email === user?.email && element.email !== null);
-
-    //     if(verifMail === false && user){
-    //       addUserInBdd();
-    //     }
-        
-    // }, [user, usersBdd])
-
-    // async function getUsers(){
-    //   const userCol = collection(db, 'users');
-    //   const userSnapshot = await getDocs(userCol);
-    //   const userbddLists = userSnapshot.docs.map( doc => {
-    //     const userBdd = doc.data() as dataUsers;
-    //     userBdd.id = doc.id;
-    //     return userBdd;
-    //   });
-    //   return userbddLists;
-    // }
-
-    //useCallBack() à regarder
-    // async function addUserInBdd() {
-    //   try {
-    //       const docRef = await addDoc(collection(db, "users"), {
-    //       email : user?.email,
-    //      });
-    //       console.log("Document written with ID: ", docRef.id);
-    //   } catch (e) {
-    //       console.error("Error adding document: ", e);
-    //   }
-    // }
 
   return (
     <IonPage>

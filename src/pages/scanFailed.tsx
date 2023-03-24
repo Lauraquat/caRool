@@ -8,7 +8,7 @@ const ScanFailed: React.FC = () => {
     const navigate = useHistory();
 
   return (
-    //Page de redirection après validation d'un QR code valide
+    //Page de redirection après validation d'un QR code invalide
     <IonPage>
       <h1>Nous n'avons pas de réservation active ce jour</h1>
       <IonButton
