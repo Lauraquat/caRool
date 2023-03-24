@@ -53,12 +53,24 @@ import "firebase/firestore";
 import firebase from "firebase/app";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore/lite";
 import { useCurrentUser } from "../hooks/UserHook";
+import { QuerySnapshot } from "firebase/firestore";
 
 
 const Location: React.FC = () => {
   const [resas, setResas] = useState<dataReservations[]>([]);
   const now = moment().format("YYYY-MM-DD");
   const later = moment().add(3, "months").format("YYYY-MM-DD");
+
+  const [reservations, setReservations] = useState<dataReservations[]>([]);
+  const [genre, setGenre] = useState("homme");
+  const [startDate, setStartDate] = useState(now);
+  const [endDate, setEndDate] = useState("");
+  const [typeBike, setTypeBike] = useState("vtt");
+  const [hashResa, setHashResa] = useState(hashRandom().toString());
+  const [hashEnter, setHashEnter] = useState(hashString("Nous avons bien pris en compte votre demande").toString());
+  const [stock, setStock] = useState(0);
+  const [numberOfResas, setNumberOfResas] = useState(0);
+
   const navigate = useHistory();
   const {
     handleSubmit,
@@ -70,7 +82,6 @@ const Location: React.FC = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      // number: "1",
       gender: "homme",
       type: "vtt",
       date: now,
@@ -82,50 +93,45 @@ const Location: React.FC = () => {
    * @param data
   */
   const onSubmit = (data: any) => {
-      // récuperation des données des résa non rendues pour la date, le type de vélo et le genre demandé
-    //   async function getResas() {
-    //     const resas = query(collection(db, "reservation"), where("startDate", "==", "2023-03-29" & "rendu", "==", false & "genre", "==", "femme" & "typeBike", "==", "vtc" ));
-    //     const resasSnapshot = await getDocs(resas);
-    //     const resasList = resasSnapshot.docs.map( doc => {
-    //       const resa = doc.data() as dataReservations;
-    //       resa.id = doc.id;
-    //       return resa;
-    //     });
-    //     return resasList;
-    //   }
-
-    //   useEffect(() => {
-    //     async function fetchResas() {
-    //       const resas = await getResas();
-    //       setResas(resas);
-    //     }
-
-    //     fetchResas();
-    //   }, []);
-      
-
-      
-    //   //récupération du stock
-    //   // const stock = query(collection(db, "velo.stock"), where("genre", "==", "femme" & "typeBike", "==", "vtc"));
-    //   const stock = 6;
-
-    //   //comparaison du stock et du nombre de résa
-    //    if(resas.length < stock){
+       //comparaison du stock et du nombre de dispo
+       if(numberOfBikes > 0){
         addReservations();
         navigate.push("/resaConfirmation");
-    //   }else{
-    //      navigate.push("/resaError");
-    //   }
-
+      }else{
+        alert("Désolé, ce vélo n'est pas disponible pour la date choisie")
+      }
   };
 
-  const [reservations, setReservations] = useState<dataReservations[]>([]);
-  const [genre, setGenre] = useState("homme");
-  const [startDate, setStartDate] = useState(now);
-  const [endDate, setEndDate] = useState("");
-  const [typeBike, setTypeBike] = useState("vtt");
-  const [hashResa, setHashResa] = useState(hashRandom().toString());
-  const [hashEnter, setHashEnter] = useState(hashString("Nous avons bien pris en compte votre demande").toString());
+  
+  useEffect(() => {
+    console.log("test", startDate, genre, typeBike);
+    const nbBikes = query(collection(db, "velo"), where("genre", "==", genre), where("type", "==", typeBike));
+    getDocs(nbBikes).then((querySnapshot) => {
+      
+      const stock = querySnapshot.docs[0].data().stock;
+
+      setStock(stock);
+    });
+    
+    const checkDispo = query(collection(db, "reservation"), where("startDate", "==", startDate), where("rendu", "==", false), where("genre", "==", genre), where("typeBike", "==", typeBike ));
+    getDocs(checkDispo).then((querySnapshot) => {
+      setNumberOfResas(querySnapshot.size);
+    });
+
+  }, [startDate, genre, typeBike]);
+
+
+  const [numberOfBikes, setNumberOfBikes] = useState(0);
+
+  useEffect(() => {
+    console.log("number of bike", stock, numberOfResas)
+    setNumberOfBikes(
+      stock - numberOfResas
+    );
+  },
+    [stock, numberOfResas]
+  );
+
 
   const user = useCurrentUser();
   const [userId, setUserId] = useState(user?.uid);
@@ -179,8 +185,11 @@ const Location: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
+
+        <p>Nombre de vélo disponible pour ce choix : {numberOfBikes}</p>
+
+
           <form onSubmit={handleSubmit(onSubmit)}>
-            
             {/* SELECT DE LA DATE */}
             <IonItem>
               <div style={{ fontWeight: "bold" }}>
@@ -196,26 +205,8 @@ const Location: React.FC = () => {
               onIonChange={(e: any) => {
                 setStartDate(e.target.value);
                 setValue("date", e.detail.value as string);
-
-                //VERIFIER LE NOMBRE DE VELO RESTANTS A LA DATE DONNEE + alerte si pas assez
               }}
             ></IonDatetime>
-
-            {/* SELECT DU NOMBRE DE VELO */}
-            {/* <IonItem>
-                <div style={{ marginRight: "20px", fontWeight: "bold" }}>
-                  Combien de vélo(s) ?
-                </div>
-                <IonInput
-                  type="number"
-                  min="1"
-                  value="1"
-                  onIonChange={(e) => {
-                    setValue("number", e.detail.value as string);
-                    //VERIFIER LE NOMBRE DE VELO RESTANTS A LA DATE DONNEE + alerte si pas assez
-                  }}
-                ></IonInput>
-              </IonItem> */}
 
             {/* SELECT DU GENRE */}
             <IonItem>
@@ -240,11 +231,6 @@ const Location: React.FC = () => {
                 rules={{ required: "Merci de renseigner ce champ" }}
               />
             </IonItem>
-            {/* <ErrorMessage
-              errors={errors}
-              name="gender"
-              as={<div style={{ color: "red" }} />}
-            /> */}
 
             {/* CHOIX DU TYPE DE VELO */}
             <IonItem>
@@ -256,13 +242,10 @@ const Location: React.FC = () => {
                   <IonRadioGroup
                     value={typeBike}
                     style={{ display: "flex", width: "100%" }}
-                    // {...register("type", { required: true })}
-                    // defaultValue={getValues("type")}
 
                     onIonChange={(e) => {
-                      // setValue("type", e.detail.value);
                       setTypeBike(e.target.value);
-                      //VERIFIER LE NOMBRE DE VELO RESTANTS  DE CE TYPE + alerte si pas assez
+                      //VERIFIER LE NOMBRE DE VELO RESTANTS  DE CE TYPE ET GENRE  + alerte si pas assez
                     }}
                   >
                     <IonItem
@@ -282,9 +265,6 @@ const Location: React.FC = () => {
                 </div>
               </IonText>
             </IonItem>
-            {/* {errors.type && (
-              <span className="error-msg">Merci de renseigner ce champ</span>
-            )} */}
 
             {/* SOUMISSION DU FORMULAIRE */}
             <div>
