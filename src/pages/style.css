@@ -30,6 +30,7 @@
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
+    padding: 1rem;
   }
 
 ion-card img {
@@ -66,4 +67,22 @@ ion-list{
     right: 1rem;
     width: 2.7rem;
     transform: translate(0, -50%);
+}
+
+ion-card-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+ion-card-title{
+    font-size: 1.4rem;
+    text-align: center;
+}
+ion-card-content div{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
 }

@@ -1,6 +1,7 @@
-import { IonCard, IonContent, IonHeader, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
+import { IonCard, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { collection, getDocs , addDoc} from 'firebase/firestore/lite';
+import { barbellOutline, bicycleOutline, hourglassOutline } from 'ionicons/icons';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
 import 'firebase/firestore';
@@ -34,6 +35,7 @@ const Event: React.FC = () => {
       }
       fetchEvents();
     }, []);
+  
 
   return (
     <IonPage>
@@ -53,10 +55,22 @@ const Event: React.FC = () => {
                 <img src={event.photo} alt=''></img>
                 <IonCardHeader>
                   <IonCardTitle>{event.titre}</IonCardTitle>
-                  <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+                  <IonCardSubtitle>{event.date.toDate().toLocaleDateString()}</IonCardSubtitle>
                 </IonCardHeader>
-                <IonCardContent >
-                  {event.description}
+                <IonCardContent class='card-content'>
+                  {event.intro}<br />
+                  <div>
+                    <IonIcon icon={hourglassOutline} size="large"></IonIcon>
+                    {event.duree}
+                  </div>
+                  <div>
+                    <IonIcon icon={bicycleOutline} size="large"></IonIcon>
+                    {event.kilometre} <br />
+                  </div>
+                  <div>
+                    <IonIcon icon={barbellOutline} size="large"></IonIcon>
+                    {event.difficulte}
+                  </div>
                 <IonButton class='cardButton'>En savoir +</IonButton>
               </IonCardContent>
             </IonCard>      
