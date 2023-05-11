@@ -7,12 +7,13 @@ export interface dataEvents {
     photo: string;
     titre: string;
     date: Timestamp;
-    deniveleMax: number;
+    denivele: number;
     difficulte : number;
     duree: number;
     itineraire: string;
     kilometre:number;
-    typeVelo: string;        
+    typeVelo: string; 
+    depart: string;       
 }
 
 export interface dataParam{
