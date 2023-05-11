@@ -1,6 +1,6 @@
 import { IonCard, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { collection, getDocs , addDoc} from 'firebase/firestore/lite';
+import { collection, getDocs , addDoc, query, where} from 'firebase/firestore/lite';
 import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline } from 'ionicons/icons';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
@@ -19,7 +19,8 @@ const Event: React.FC = () => {
   
     async function getEvents() {
       const eventCol = collection(db, 'event');
-      const eventSnapshot = await getDocs(eventCol);
+      const eventQuery = query(eventCol, where("date", ">", new Date()));
+      const eventSnapshot = await getDocs(eventQuery);
       const eventLists = eventSnapshot.docs.map( doc => {
         const event = doc.data() as dataEvents;
         event.id = doc.id;
@@ -51,7 +52,7 @@ const Event: React.FC = () => {
           navigate.push('/location');
         }}>Réserver un vélo</IonButton>
             <IonToolbar>
-              <IonTitle class='py-1' >Évènement à venir</IonTitle>
+              <IonTitle class='py-1' >Évènements à venir</IonTitle>
             </IonToolbar>
         <IonList class='py-1'>
           {events.map((event)=>  (
