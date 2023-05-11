@@ -55,13 +55,18 @@ const Scan: React.FC = () => {
         currentResa.userId != user?.uid
       ) {
         navigate.push("/scanFailed");
-      } else if (
+      } else if(
+        currentResa && 
+        result.content == currentResa.hashEnter &&        
+        currentResa.rendu == false){
+        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
+      }else if (
         result.content == currentResa.hashResa &&
         currentResa.rendu == false &&
         currentResa.userId == user?.uid
       ) {
         //On redirige vers la page des options
-        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
+        navigate.push("/scanValid", { hashResa: currentResa.hashResa });
       }
     }
   }

@@ -50,23 +50,6 @@ const ScanOptions: React.FC = ({ route }: any) => {
         <section className="page-message">
         <h1>Bienvenue</h1>
         <p>Vous pouvez accéder à votre réservation. Profitez bien !</p>
-        <IonButton
-          onClick={(e) => {
-            e.preventDefault();
-            navigate.push("/scan");
-          }}
-        >
-          Je viens chercher mon vélo
-        </IonButton>
-        <IonButton
-          onClick={(e) => {
-            renderBike();
-            e.preventDefault();
-            navigate.push("/retourVelo");
-          }}
-        >
-          Je rends mon vélo
-        </IonButton>
 
         <IonButton
           onClick={(e) => {
