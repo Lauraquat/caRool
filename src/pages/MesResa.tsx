@@ -16,7 +16,7 @@ const MesResa: React.FC = () => {
     useEffect(() => {
         async function getReservations() {
             const reservationCol =collection(db, "reservation")
-            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""));
+            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""),  where("rendu", "==", false));
                 const reservationSnapshot = await getDocs(resaQuery);
                 const reservationLists = reservationSnapshot.docs.map( doc => {
                   const reservation = doc.data() as dataReservations;
@@ -53,11 +53,9 @@ const MesResa: React.FC = () => {
             <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
-                    <IonTitle></IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent id="contentTest" fullscreen>
+            <IonContent id="content-mes-resa" fullscreen>
                 <p>
                     Vous n'avez pas de reservation
                 </p>
