@@ -48,47 +48,49 @@ const MesResa: React.FC = () => {
           }
     }
 
-if( reservations.length === 0){
-    return(
-        <IonPage>
-        <IonHeader>
-            <IonToolbar>
-                <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
-                <IonTitle></IonTitle>
-            </IonToolbar>
-        </IonHeader>
-        <IonContent id="contentTest" fullscreen>
-            <p>
-                Vous n'avez pas de reservation
-            </p>
-        </IonContent>
-        </IonPage>
-    
-    )
-}
+    if( reservations.length === 0){
+        return(
+            <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
+                    <IonTitle></IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent id="contentTest" fullscreen>
+                <p>
+                    Vous n'avez pas de reservation
+                </p>
+            </IonContent>
+            </IonPage>
+        
+        )
+    }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-            <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
-            <IonTitle></IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent id="contentTest" fullscreen>
-      {reservations.map((reservation)=>  (
+      <IonContent id="content-mes-resa" fullscreen>
+        <IonList class='py-1'>
+        {reservations.map((reservation)=>  (
             <IonCard 
              key={reservation.id}
             >
-                <IonCardHeader>
-                  <IonCardTitle>{reservation.genre}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent >
-                  {reservation.typeBike}
+              <IonCardHeader>
+                <IonCardTitle> Résevation du {reservation.startDate}</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent >               
+                  Type de vélo : {reservation.typeBike}
+                  <br />
+                  Vélo pour {reservation.genre}
               </IonCardContent>
               <IonButton onClick={() => deleteResa(reservation.id)}>Supprimer la reservation</IonButton>  
             </IonCard>   
  
           ))}
+          </IonList>
       </IonContent>
     </IonPage>
   );
