@@ -24,7 +24,7 @@ import { hashRandom, hashString } from "react-hash-string";
 import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { db } from "../firebaseConfig";
-import { dataReservations } from "../dataBdd";
+import { dataBookings } from "../dataBdd";
 import "firebase/firestore";
 import {
   collection,
@@ -57,16 +57,16 @@ const Location: React.FC = () => {
   const now = moment().format("YYYY-MM-DD");
   const later = moment().add(3, "months").format("YYYY-MM-DD");
 
-  const [reservations, setReservations] = useState<dataReservations[]>([]);
+  const [bookings, setBookings] = useState<dataBookings[]>([]);
   const [startDate, setStartDate] = useState(now);
-  const [genre, setGenre] = useState("homme");
+  const [genre, setGender] = useState("homme");
   const [typeBike, setTypeBike] = useState("vtt");
-  const [hashResa, setHashResa] = useState(hashRandom().toString());
+  const [hashResa, setHashBooking] = useState(hashRandom().toString());
   const [hashEnter, setHashEnter] = useState(
     hashString("Nous avons bien pris en compte votre demande").toString()
   );
   const [stock, setStock] = useState(0);
-  const [numberOfResas, setNumberOfResas] = useState(0);
+  const [numberOfBookings, setNumberOfBookings] = useState(0);
   const navigate = useHistory();
   const {
     handleSubmit,
@@ -87,8 +87,8 @@ const Location: React.FC = () => {
   const onSubmit = (data: any) => {
     //Si le nombre de vélos en stock (avec les critères demandés) est supérieur à 0 : validation de la réservation
     if (numberOfBikes > 0) {
-      addReservations();
-      navigate.push("/resaConfirmation");
+      addBookings();
+      navigate.push("/bookingConfirmation");
     } else {
       alert("Désolé, ce vélo n'est pas disponible pour la date choisie");
     }
@@ -114,7 +114,7 @@ const Location: React.FC = () => {
       where("typeBike", "==", typeBike)
     );
     getDocs(checkDispo).then((querySnapshot) => {
-      setNumberOfResas(querySnapshot.size);
+      setNumberOfBookings(querySnapshot.size);
     });
   }, [startDate, genre, typeBike]);
 
@@ -122,31 +122,31 @@ const Location: React.FC = () => {
 
   //Calcul du nombre de vélos disponibles selon les critères demandés
   useEffect(() => {
-    setNumberOfBikes(stock - numberOfResas);
-  }, [stock, numberOfResas]);
+    setNumberOfBikes(stock - numberOfBookings);
+  }, [stock, numberOfBookings]);
 
   const user = useCurrentUser();
   const [userId, setUserId] = useState(user?.uid);
 
-  async function getReservations() {
-    const resaCol = collection(db, "reservation");
-    const resaSnapshot = await getDocs(resaCol);
-    const resaLists = resaSnapshot.docs.map((doc) => {
-      const reservation = doc.data() as dataReservations;
-      reservation.id = doc.id;
-      return reservation;
+  async function getBookings() {
+    const bookingCol = collection(db, "reservation");
+    const bookingSnapshot = await getDocs(bookingCol);
+    const bookingLists = bookingSnapshot.docs.map((doc) => {
+      const booking = doc.data() as dataBookings;
+      booking.id = doc.id;
+      return booking;
     });
-    return resaLists;
+    return bookingLists;
   }
   useEffect(() => {
     async function fetchUsers() {
-      const reservations = await getReservations();
-      setReservations(reservations);
+      const bookings = await getBookings();
+      setBookings(bookings);
     }
     fetchUsers();
   }, []);
 
-  async function addReservations() {
+  async function addBookings() {
     try {
       const docRef = await addDoc(collection(db, "reservation"), {
         genre,
@@ -202,7 +202,7 @@ const Location: React.FC = () => {
                   <IonSelect
                     value={genre}
                     onIonChange={(e) => {
-                      setGenre(e.target.value);
+                      setGender(e.target.value);
                       setValue("gender", e.detail.value);
                     }}
                   >
@@ -259,7 +259,7 @@ const Location: React.FC = () => {
               <IonButton
                 type="submit"
                 onClick={() => {
-                  setGenre("homme");
+                  setGender("homme");
                   setTypeBike("vtt");
                   setStartDate(now);
                 }}

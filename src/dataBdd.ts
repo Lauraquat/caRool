@@ -16,18 +16,7 @@ export interface dataEvents {
     depart: string;       
 }
 
-export interface dataParam{
-    id:string;
-}
-
-export interface dataBike{
-    id:string;
-    genre : string;
-    name: string;
-    type : string;
-}
-
-export interface dataReservations{
+export interface dataBookings{
     id : string;
     startDate : string;
     endDate  : string;

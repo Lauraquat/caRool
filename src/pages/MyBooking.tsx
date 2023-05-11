@@ -3,45 +3,45 @@ import { collection, getDocs ,query, where , deleteDoc, doc} from 'firebase/fire
 import { db } from '../firebaseConfig';
 import 'firebase/app';
 import 'firebase/firestore';
-import { dataReservations } from '../dataBdd';
+import { dataBookings } from '../dataBdd';
 import { useEffect, useState } from 'react';
 
 
 import './style.css';
 import { useCurrentUser } from '../hooks/UserHook';
 
-const MesResa: React.FC = () => {
-    const [reservations, setReservations] = useState<dataReservations[]>([]);
+const MyBooking: React.FC = () => {
+    const [bookings, setBookings] = useState<dataBookings[]>([]);
     const user = useCurrentUser();
     useEffect(() => {
-        async function getReservations() {
-            const reservationCol =collection(db, "reservation")
-            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""));
-                const reservationSnapshot = await getDocs(resaQuery);
-                const reservationLists = reservationSnapshot.docs.map( doc => {
-                  const reservation = doc.data() as dataReservations;
-                  reservation.id = doc.id;
-                  return reservation;
+        async function getBookings() {
+            const bookingCol =collection(db, "reservation")
+            const bookingQuery = query(bookingCol, where("userId", "==", user?.uid || ""));
+                const bookingSnapshot = await getDocs(bookingQuery);
+                const bookingLists = bookingSnapshot.docs.map( doc => {
+                  const booking = doc.data() as dataBookings;
+                  booking.id = doc.id;
+                  return booking;
                 });
-                return reservationLists ;
+                return bookingLists ;
           }
-          async function fetchReservations() {
-            const reservations = await getReservations();
+          async function fetchBookings() {
+            const bookings = await getBookings();
             // const usersBdd = await getUsers();
-            setReservations(reservations);
+            setBookings(bookings);
             // setUsers(usersBdd);
           }
-        fetchReservations();
+        fetchBookings();
       }, [user?.uid]);
 
-    async function deleteResa(resaId : string){
-        console.log(reservations)
+    async function deleteBooking(bookingId : string){
+        console.log(bookings)
         try {
-            const resaRef = doc(db, "reservation", resaId);
-            await deleteDoc(resaRef);
+            const bookingRef = doc(db, "booking", bookingId);
+            await deleteDoc(bookingRef);
             // Mettre à jour les réservations après suppression
-            const updatedReservations = reservations.filter((resa) => resa.id !== resaId);
-            setReservations(updatedReservations);
+            const updatedBookings = bookings.filter((booking) => booking.id !== bookingId);
+            setBookings(updatedBookings);
             console.log("Réservation supprimée avec succès");
           } catch (error) {
             console.error("Erreur lors de la suppression de la réservation", error);
@@ -61,7 +61,7 @@ const MesResa: React.FC = () => {
       return `${day} ${months[monthIndex]} ${year}`;
     }
 
-    if( reservations.length === 0){
+    if( bookings.length === 0){
         return(
             <IonPage>
             <IonHeader>
@@ -72,7 +72,7 @@ const MesResa: React.FC = () => {
             </IonHeader>
             <IonContent id="contentTest" fullscreen>
                 <p>
-                    Vous n'avez pas de reservation
+                    Vous n'avez pas de booking
                 </p>
             </IonContent>
             </IonPage>
@@ -85,21 +85,21 @@ const MesResa: React.FC = () => {
         <IonToolbar>
         </IonToolbar>
       </IonHeader>
-      <IonContent id="content-mes-resa" fullscreen>
+      <IonContent id="content-booking" fullscreen>
         <IonList class='py-1'>
-        {reservations.map((reservation)=>  (
+        {bookings.map((booking)=>  (
             <IonCard 
-             key={reservation.id}
+             key={booking.id}
             >
               <IonCardHeader>
-                <IonCardTitle> Résevation du {formatDate(reservation.startDate)}</IonCardTitle>
+                <IonCardTitle> Résevation du {formatDate(booking.startDate)}</IonCardTitle>
               </IonCardHeader>
               <IonCardContent >               
-                  Type de vélo : {reservation.typeBike}
+                  Type de vélo : {booking.typeBike}
                   <br />
-                  Vélo pour {reservation.genre}
+                  Vélo pour {booking.genre}
               </IonCardContent>
-              <IonButton onClick={() => deleteResa(reservation.id)}>Supprimer la reservation</IonButton>  
+              <IonButton onClick={() => deleteBooking(booking.id)}>Supprimer la réservation</IonButton>  
             </IonCard>   
  
           ))}
@@ -109,7 +109,7 @@ const MesResa: React.FC = () => {
   );
 };
 
-export default MesResa;
+export default MyBooking;
 
 
 

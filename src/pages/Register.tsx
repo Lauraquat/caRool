@@ -4,8 +4,7 @@ import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonPage, IonToast} 
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { auth, db } from '../firebaseConfig';
-import { collection, addDoc , doc, setDoc} from 'firebase/firestore/lite';
-import { useCurrentUser } from '../hooks/UserHook';
+import { doc, setDoc} from 'firebase/firestore/lite';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");

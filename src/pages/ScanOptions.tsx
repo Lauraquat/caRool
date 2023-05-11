@@ -1,6 +1,6 @@
-import { IonButton, IonPage, IonContent, IonHeader, IonToolbar } from "@ionic/react";
+import { IonButton, IonPage, IonContent, IonToolbar } from "@ionic/react";
 import { useHistory, useLocation } from "react-router-dom";
-import { dataReservations } from "../dataBdd";
+import { dataBookings } from "../dataBdd";
 import React, { useState } from "react";
 import {
   collection,
@@ -15,25 +15,25 @@ import "firebase/firestore";
 
 const ScanOptions: React.FC = ({ route }: any) => {
   const navigate = useHistory();
-  const location = useLocation<dataReservations>();
+  const location = useLocation<dataBookings>();
   const hashResa = location.state?.hashResa;
   const [rendu, setRendu] = useState(false);
 
   function renderBike() {
-    const retourVelo = query(
+    const returnBike = query(
       collection(db, "reservation"),
       where("hashResa", "==", hashResa)
     );
 
-    console.log(retourVelo);
+    console.log(returnBike);
 
-    getDocs(retourVelo)
+    getDocs(returnBike)
       .then((querySnapshot) => {
-        const resaId = querySnapshot.docs[0].id;
+        const bookingId = querySnapshot.docs[0].id;
 
-        console.log("resaId", resaId);
+        console.log("bookingId", bookingId);
 
-        return updateDoc(doc(db, "reservation", resaId), {
+        return updateDoc(doc(db, "reservation", bookingId), {
           rendu: true,
         });
       })
@@ -61,7 +61,7 @@ const ScanOptions: React.FC = ({ route }: any) => {
           onClick={(e) => {
             renderBike();
             e.preventDefault();
-            navigate.push("/retourVelo");
+            navigate.push("/returnBike");
           }}
         >
           Je rends mon vélo

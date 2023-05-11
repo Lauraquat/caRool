@@ -6,7 +6,7 @@ import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
 import { useHistory } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
-import { dataReservations } from "../dataBdd";
+import { dataBookings } from "../dataBdd";
 import moment from "moment";
 import { getAuth } from "@firebase/auth";
 
@@ -14,15 +14,15 @@ const Scan: React.FC = () => {
   const [qrCode, setQrCode] = useState("");
   const navigate = useHistory();
 
-  async function getResas() {
-    const resaCol = collection(db, "reservation");
-    const resaSnapshot = await getDocs(resaCol);
-    const resaLists = resaSnapshot.docs.map((doc) => {
-      const resa = doc.data() as dataReservations;
-      resa.id = doc.id;
-      return resa;
+  async function getBookings() {
+    const bookingCol = collection(db, "reservation");
+    const bookingSnapshot = await getDocs(bookingCol);
+    const bookingLists = bookingSnapshot.docs.map((doc) => {
+      const booking = doc.data() as dataBookings;
+      booking.id = doc.id;
+      return booking;
     });
-    return resaLists;
+    return bookingLists;
   }
 
   //Affichage du scanner à QRcode
@@ -42,31 +42,31 @@ const Scan: React.FC = () => {
     if (result.hasContent) {
       setQrCode(result.content ?? "Erreur de lecture du QRcode");
 
-      const resas = await getResas();
+      const bookings = await getBookings();
       const today = moment().format("YYYY-MM-DD");
 
       //On cherche toutes les réservations qui ont une startDate correspondante à today
-      const currentResa = resas.find((resa) => resa.startDate === today);
+      const currentBooking = bookings.find((booking) => booking.startDate === today);
 
       // On vérifie s'il y a une réservation pour le user sur la journée
       if(
-        currentResa && 
-        result.content == currentResa.hashEnter &&        
-        currentResa.rendu == false){
-        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
+        currentBooking && 
+        result.content == currentBooking.hashEnter &&        
+        currentBooking.rendu == false){
+        navigate.push("/scanOptions", { hashResa: currentBooking.hashResa });
       } else if (
-        !currentResa ||
-        result.content != currentResa.hashResa ||
-        currentResa.userId != user?.uid
+        !currentBooking ||
+        result.content != currentBooking.hashResa ||
+        currentBooking.userId != user?.uid
       ) {
         navigate.push("/scanFailed");
       } else if (
-        result.content == currentResa.hashResa &&
-        currentResa.rendu == false &&
-        currentResa.userId == user?.uid
+        result.content == currentBooking.hashResa &&
+        currentBooking.rendu == false &&
+        currentBooking.userId == user?.uid
       ) {
         //On redirige vers la page des options
-        navigate.push("/scanValid", { hashResa: currentResa.hashResa });
+        navigate.push("/scanValid", { hashResa: currentBooking.hashResa });
       }
     }
   }

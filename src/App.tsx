@@ -10,8 +10,8 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import User from './pages/User';
 import ScanOptions from './pages/ScanOptions';
-import ResaConfirmation from './pages/ResaConfirmation';
-import MesResa from './pages/MesResa';
+import BookingConfirmation from './pages/BookingConfirmation';
+import MyBooking from './pages/MyBooking';
 import ScanFailed from './pages/ScanFailed';
 import ScanValid from './pages/ScanValid';
 
@@ -36,7 +36,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
-import RetourVelo from './pages/RetourVelo';
+import ReturnBike from './pages/ReturnBike';
 
 setupIonicReact();
 
@@ -84,8 +84,8 @@ const App: React.FC = () => {
             <Route path="/user">
               <User/>
             </Route>
-            <Route path="/mesresa">
-              <MesResa/>
+            <Route path="/myBooking">
+              <MyBooking/>
             </Route>
             <Route path="/location">
               <Location />
@@ -102,11 +102,11 @@ const App: React.FC = () => {
             <Route path="/scanFailed">
               <ScanFailed />
             </Route>
-            <Route path="/retourVelo">
-              <RetourVelo />
+            <Route path="/returnBike">
+              <ReturnBike />
             </Route>
-            <Route path="/resaConfirmation">
-              <ResaConfirmation />
+            <Route path="/bookingConfirmation">
+              <BookingConfirmation />
             </Route>
             <Route exact path="/register">
               <Redirect to="/event" />

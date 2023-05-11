@@ -3,34 +3,34 @@ import { useHistory } from "react-router-dom";
 
 import "./style.css";
 import { useEffect, useState } from "react";
-import { dataReservations } from "../dataBdd";
+import { dataBookings } from "../dataBdd";
 import { collection, getDocs, query, where } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
 import { useCurrentUser } from '../hooks/UserHook';
 
-const ResaConfirmation: React.FC = () => {
+const BookingConfirmation: React.FC = () => {
     const navigate = useHistory();
-    const [reservations, setReservations] = useState<dataReservations[]>([]);
+    const [bookings, setBookings] = useState<dataBookings[]>([]);
     const user = useCurrentUser();
     useEffect(() => {
-        async function getReservations() {
-            const reservationCol =collection(db, "reservation")
-            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""));
-                const reservationSnapshot = await getDocs(resaQuery);
-                const reservationLists = reservationSnapshot.docs.map( doc => {
-                  const reservation = doc.data() as dataReservations;
-                  reservation.id = doc.id;
-                  return reservation;
+        async function getBookings() {
+            const bookingCol =collection(db, "reservation")
+            const bookingQuery = query(bookingCol, where("userId", "==", user?.uid || ""));
+                const bookingSnapshot = await getDocs(bookingQuery);
+                const bookingLists = bookingSnapshot.docs.map( doc => {
+                  const booking = doc.data() as dataBookings;
+                  booking.id = doc.id;
+                  return booking;
                 });
-                return reservationLists ;
+                return bookingLists ;
           }
-          async function fetchReservations() {
-            const reservations = await getReservations();
+          async function fetchBookings() {
+            const bookings = await getBookings();
             // const usersBdd = await getUsers();
-            setReservations(reservations);
+            setBookings(bookings);
             // setUsers(usersBdd);
           }
-        fetchReservations();
+        fetchBookings();
       }, [user?.uid]);
 
 
@@ -38,7 +38,7 @@ const ResaConfirmation: React.FC = () => {
     //Page de redirection après validation de la réservation
     <IonPage>
       <IonToolbar>
-        Reservation
+        Booking
       </IonToolbar>
         <IonContent >
           <section className="page-message">
@@ -59,4 +59,4 @@ const ResaConfirmation: React.FC = () => {
   );
 };
 
-export default ResaConfirmation;
+export default BookingConfirmation;

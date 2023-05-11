@@ -1,9 +1,9 @@
-import { IonButton, IonPage, IonHeader, IonContent, IonToolbar } from "@ionic/react";
+import { IonButton, IonPage, IonContent, IonToolbar } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
-const RetourVelo: React.FC = () => {
+const ReturnBike: React.FC = () => {
   const navigate = useHistory();
 
   return (
@@ -38,4 +38,4 @@ const RetourVelo: React.FC = () => {
   );
 };
 
-export default RetourVelo;
+export default ReturnBike;

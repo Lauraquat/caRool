@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import {
   GoogleAuthProvider,
-  FacebookAuthProvider,
+  // FacebookAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -22,16 +22,16 @@ const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const providerGoogle = new GoogleAuthProvider();
-  const providerFacebook = new FacebookAuthProvider();
+  // const providerFacebook = new FacebookAuthProvider();
 
-  function signInWithFacebook() {
-    signInWithPopup(auth, providerFacebook)
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-        alert("Erreur lors de l'authentification avec facebook");
-      });
-  }
+  // function signInWithFacebook() {
+  //   signInWithPopup(auth, providerFacebook)
+  //     .then(() => {})
+  //     .catch((error) => {
+  //       console.log(error);
+  //       alert("Erreur lors de l'authentification avec facebook");
+  //     });
+  // }
   function signInWithGoogle() {
     signInWithPopup(auth, providerGoogle)
       .then(() => {})

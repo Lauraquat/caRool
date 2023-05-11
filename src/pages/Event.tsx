@@ -1,6 +1,6 @@
 import { IonCard, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { collection, getDocs , addDoc, query, where} from 'firebase/firestore/lite';
+import { collection, getDocs , query, where} from 'firebase/firestore/lite';
 import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline } from 'ionicons/icons';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
@@ -8,7 +8,6 @@ import 'firebase/firestore';
 import { dataEvents, dataUsers } from '../dataBdd';
 
 import './style.css';
-import { useCurrentUser } from '../hooks/UserHook';
 import { useHistory } from 'react-router';
 
 const Event: React.FC = () => {
