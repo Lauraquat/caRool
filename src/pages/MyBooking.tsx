@@ -9,8 +9,10 @@ import { useEffect, useState } from 'react';
 
 import './style.css';
 import { useCurrentUser } from '../hooks/UserHook';
+import { useHistory } from 'react-router';
 
 const MyBooking: React.FC = () => {
+    const navigate = useHistory();   
     const [bookings, setBookings] = useState<dataBookings[]>([]);
     const user = useCurrentUser();
     useEffect(() => {
@@ -66,14 +68,23 @@ const MyBooking: React.FC = () => {
             <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
-                    <IonTitle></IonTitle>
+                  Mes réservations
                 </IonToolbar>
             </IonHeader>
             <IonContent id="contentTest" fullscreen>
-                <p>
-                    Vous n'avez pas de booking
-                </p>
+              <section className='page-message'>
+                <h1>
+                    Vous n'avez pas de réservation
+                </h1>
+                <IonButton
+        onClick={(e) => {
+          e.preventDefault();
+          navigate.push("/home");
+        }}
+        >
+        Retourner à l'accueil
+      </IonButton>
+              </section>
             </IonContent>
             </IonPage>
         
@@ -83,6 +94,7 @@ const MyBooking: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          Mes réservations
         </IonToolbar>
       </IonHeader>
       <IonContent id="content-booking" fullscreen>

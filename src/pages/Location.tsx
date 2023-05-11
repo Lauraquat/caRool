@@ -168,14 +168,11 @@ const Location: React.FC = () => {
       <IonPage>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
-              <IonBackButton />
-            </IonButtons>
             <IonTitle>Formulaire de réservation</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form className="form-location" onSubmit={handleSubmit(onSubmit)}>
             {/* SELECT DE LA DATE */}
             <IonItem>
               <div style={{ fontWeight: "bold" }}>
@@ -249,9 +246,9 @@ const Location: React.FC = () => {
               </IonText>
             </IonItem>
 
-            <p>
+            <p className="bike-dispo">
               Nombre de vélo(s) disponible(s) pour ces critères :{" "}
-              {numberOfBikes}
+              <b>{numberOfBikes}</b>
             </p>
 
             {/* SOUMISSION DU FORMULAIRE */}

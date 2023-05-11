@@ -50,7 +50,7 @@ const ScanOptions: React.FC = ({ route }: any) => {
       </IonToolbar>
       <IonContent>
         <section className="page-message">
-        <p>Vous pouvez accéder à votre réservation. Profitez bien !</p>
+        <h1>Vous pouvez accéder à votre réservation. <br/> Profitez bien !</h1>
 
         <IonButton
           onClick={(e) => {

@@ -12,8 +12,9 @@ const ReturnBike: React.FC = () => {
       <IonToolbar>Retour velo</IonToolbar>
       <IonContent>
         <section className="page-message">
+        <h1>Merci d'avoir utilisé caRool.</h1>
         <p>
-          Merci d'avoir utilisé caRool. Nous espérons que vous avez passé un bon
+          Nous espérons que vous avez passé un bon
           moment et vous revoir bientôt !
         </p>
         <IonButton

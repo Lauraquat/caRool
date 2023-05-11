@@ -43,7 +43,7 @@ const BookingConfirmation: React.FC = () => {
         <IonContent >
           <section className="page-message">
 
-        <h1>Votre réservation à bien été prise en compte. À très vite !</h1>
+        <h1>Votre réservation à bien été prise en compte.<br/> À très vite !</h1>
 
       <IonButton
         onClick={(e) => {

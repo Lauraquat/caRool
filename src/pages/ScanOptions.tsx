@@ -46,9 +46,9 @@ const ScanOptions: React.FC = ({ route }: any) => {
     //Page de redirection après validation d'un QR code valide
     <IonPage>
       <IonToolbar></IonToolbar>
-      <IonContent>
+      <IonContent id="scan-option">
         <section className="page-message">
-        <p>Vous pouvez accéder à votre réservation. Profitez bien !</p>
+        <h1 className="title-log">Bienvenue</h1>        
         <IonButton
           onClick={(e) => {
             e.preventDefault();
@@ -65,15 +65,6 @@ const ScanOptions: React.FC = ({ route }: any) => {
           }}
         >
           Je rends mon vélo
-        </IonButton>
-
-        <IonButton
-          onClick={(e) => {
-            e.preventDefault();
-            navigate.push("/home");
-          }}
-        >
-          Retourner à l'accueil
         </IonButton>
         </section>
       </IonContent>
