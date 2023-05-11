@@ -5,7 +5,7 @@ import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline } f
 import { db } from '../firebaseConfig';
 import 'firebase/app';
 import 'firebase/firestore';
-import { dataEvents} from '../dataBdd';
+import { dataEvents, dataUsers } from '../dataBdd';
 
 import './style.css';
 import { useCurrentUser } from '../hooks/UserHook';
@@ -15,22 +15,17 @@ const Event: React.FC = () => {
   // const user = useCurrentUser();
   const navigate = useHistory();
   const [events, setEvents] = useState<dataEvents[]>([]);
-
-  //Récupération de tous les évènements en BDD
-  async function getEvents() {
-    const eventCol = collection(db, "event");
-    const eventSnapshot = await getDocs(eventCol);
-    const eventLists = eventSnapshot.docs.map((doc) => {
-      const event = doc.data() as dataEvents;
-      event.id = doc.id;
-      return event;
-    });
-    return eventLists;
-  }
-  useEffect(() => {
-    async function fetchEvents() {
-      const events = await getEvents();
-      setEvents(events);
+  const [usersBdd, setUsers] = useState<dataUsers[]>([]);
+  
+    async function getEvents() {
+      const eventCol = collection(db, 'event');
+      const eventSnapshot = await getDocs(eventCol);
+      const eventLists = eventSnapshot.docs.map( doc => {
+        const event = doc.data() as dataEvents;
+        event.id = doc.id;
+        return event;
+      });
+      return eventLists ;
     }
     useEffect(() => {
       async function fetchEvents() {
@@ -86,11 +81,13 @@ const Event: React.FC = () => {
                   </div>
                 <IonButton class='cardButton'>En savoir +</IonButton>
               </IonCardContent>
-            </IonCard>
+            </IonCard>      
           ))}
         </IonList>
       </IonContent>
     </IonPage>
+    
   );
-          };
+};
+
 export default Event;
