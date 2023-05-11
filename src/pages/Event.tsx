@@ -1,7 +1,7 @@
 import { IonCard, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { collection, getDocs , addDoc} from 'firebase/firestore/lite';
-import { barbellOutline, bicycleOutline, hourglassOutline } from 'ionicons/icons';
+import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline } from 'ionicons/icons';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
 import 'firebase/firestore';
@@ -9,10 +9,11 @@ import { dataEvents, dataUsers } from '../dataBdd';
 
 import './style.css';
 import { useCurrentUser } from '../hooks/UserHook';
+import { useHistory } from 'react-router';
 
 const Event: React.FC = () => {
   // const user = useCurrentUser();
-
+  const navigate = useHistory();
   const [events, setEvents] = useState<dataEvents[]>([]);
   const [usersBdd, setUsers] = useState<dataUsers[]>([]);
   
@@ -45,7 +46,10 @@ const Event: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent  fullscreen>
-          <IonButton class='mt-1 py-1'>Réserver un vélo</IonButton>
+          <IonButton class='mt-1 py-1'  onClick={(e) => {
+          e.preventDefault();
+          navigate.push('/location');
+        }}>Réserver un vélo</IonButton>
             <IonToolbar>
               <IonTitle class='py-1' >Évènement à venir</IonTitle>
             </IonToolbar>
@@ -54,8 +58,8 @@ const Event: React.FC = () => {
             <IonCard key={event.id} routerLink={`/event/${event.id}`}>
                 <img src={event.photo} alt=''></img>
                 <IonCardHeader>
-                  <IonCardTitle>{event.titre}</IonCardTitle>
                   <IonCardSubtitle>{event.date.toDate().toLocaleDateString()}</IonCardSubtitle>
+                  <IonCardTitle>{event.titre}</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent class='card-content'>
                   {event.intro}<br />
@@ -70,6 +74,10 @@ const Event: React.FC = () => {
                   <div>
                     <IonIcon icon={barbellOutline} size="large"></IonIcon>
                     {event.difficulte}
+                  </div>
+                  <div>
+                    <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
+                    {event.denivele}
                   </div>
                 <IonButton class='cardButton'>En savoir +</IonButton>
               </IonCardContent>
