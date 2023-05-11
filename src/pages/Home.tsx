@@ -7,6 +7,7 @@ import {
   IonHeader,
   IonInput,
   IonPage,
+  IonImg
 } from "@ionic/react";
 
 import { Link } from "react-router-dom";
@@ -55,12 +56,16 @@ const Home: React.FC = () => {
       <IonHeader>
       </IonHeader>
       <IonContent>
+        <section className="log-home">
+
+        <IonImg class='logo-acceuil' src='../../assets/icon/logoWithTitle.svg' alt='logo ça Rool'></IonImg>           
+        <h1 className="title-log">Bienvenue</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             logIn();
           }}
-        >
+          >
           <IonInput
             name="email"
             placeholder="Email"
@@ -71,20 +76,20 @@ const Home: React.FC = () => {
             type="password"
             placeholder="Password"
             onIonChange={(e: any) => setPassword(e.target.value)}
-          />
-          <IonButton expand="full" type="submit">
-            Login
+            />
+          <IonButton type="submit">
+            SE CONNECTER
           </IonButton>
         </form>
-        <IonButton onClick={signInWithGoogle} expand="full" type="submit">
-          Se connecter avec google
-        </IonButton>
-        <IonButton onClick={signInWithFacebook} expand="full" type="submit">
+        <Link to="/register">S'INSCRIRE</Link>
+        <p>Se connecter avec :</p>
+        <button onClick={signInWithGoogle} type="submit" id="google-button">
+          <img src="../../assets/icon/google.png" alt="se connecter avec google" />
+        </button>
+        {/* <IonButton onClick={signInWithFacebook} expand="full" type="submit">
           Se connecter avec facebook
-        </IonButton>
-        <p>
-          New here ? <Link to="/register">Register</Link>
-        </p>
+        </IonButton> */}
+        </section>
         </IonContent>
     </IonPage>
   );

@@ -1,7 +1,7 @@
 import './style.css';
 
 import React, {useState, useEffect} from 'react';
-import { IonButton, IonContent, IonHeader, IonInput, IonPage, IonToast} from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonPage, IonToast} from '@ionic/react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { auth, db } from '../firebaseConfig';
@@ -56,10 +56,14 @@ const Register: React.FC = () => {
       <IonHeader>
       </IonHeader>
       <IonContent>
+      <section className="log-home">
+
+       <IonImg class='logo-acceuil' src='../../assets/icon/logoWithTitle.svg' alt='logo ça Rool'></IonImg>           
         <form onSubmit={(e) => {
             e.preventDefault();
             register()
         }}>
+            <h1 className='title-log'>Créer un comte</h1>
             <IonInput 
                 placeholder='Email' 
                 onIonChange={(e:any) => setEmail(e.target.value)}/>
@@ -71,11 +75,11 @@ const Register: React.FC = () => {
                 type='password'
                 placeholder='Confirm Password'
                 onIonChange={(e:any) => setCPassword(e.target.value)}/>
-            <IonButton expand="full" type="submit">Register</IonButton>
+            <IonButton type="submit">Register</IonButton>
         </form>
-      <p>Already have an account?
-        <Link to="/home">Login</Link>
-      </p>
+        <Link to="/">SE CONNECTER</Link>
+      </section>
+
       </IonContent>
       <IonToast
         id="password"
