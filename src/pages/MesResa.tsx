@@ -16,7 +16,7 @@ const MesResa: React.FC = () => {
     useEffect(() => {
         async function getReservations() {
             const reservationCol =collection(db, "reservation")
-            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""),  where("rendu", "==", false));
+            const resaQuery = query(reservationCol, where("userId", "==", user?.uid || ""));
                 const reservationSnapshot = await getDocs(resaQuery);
                 const reservationLists = reservationSnapshot.docs.map( doc => {
                   const reservation = doc.data() as dataReservations;
@@ -47,15 +47,30 @@ const MesResa: React.FC = () => {
             console.error("Erreur lors de la suppression de la réservation", error);
           }
     }
+    function formatDate(dateString: string): string {
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      const year = date.getFullYear();
+  
+      const months = [
+        "janvier", "février", "mars", "avril", "mai", "juin",
+        "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+      ];
+  
+      return `${day} ${months[monthIndex]} ${year}`;
+    }
 
     if( reservations.length === 0){
         return(
             <IonPage>
             <IonHeader>
                 <IonToolbar>
+                    <IonButton slot="start"><IonBackButton defaultHref="/home"/></IonButton>
+                    <IonTitle></IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent id="content-mes-resa" fullscreen>
+            <IonContent id="contentTest" fullscreen>
                 <p>
                     Vous n'avez pas de reservation
                 </p>
@@ -77,7 +92,7 @@ const MesResa: React.FC = () => {
              key={reservation.id}
             >
               <IonCardHeader>
-                <IonCardTitle> Résevation du {reservation.startDate}</IonCardTitle>
+                <IonCardTitle> Résevation du {formatDate(reservation.startDate)}</IonCardTitle>
               </IonCardHeader>
               <IonCardContent >               
                   Type de vélo : {reservation.typeBike}
