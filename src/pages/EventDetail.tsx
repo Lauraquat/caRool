@@ -1,18 +1,12 @@
-import {
-  IonContent,
-  IonBackButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-} from "@ionic/react";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { dataEvents } from "../dataBdd";
-import { doc, getDoc } from "firebase/firestore/lite";
-import { db } from "../firebaseConfig";
-import "firebase/app";
-import "firebase/firestore";
+import { IonContent,IonIcon, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline , trailSignOutline,  locationOutline} from 'ionicons/icons';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { dataEvents } from '../dataBdd';
+import { doc, getDoc } from 'firebase/firestore/lite';
+import { db } from '../firebaseConfig';
+import 'firebase/app';
+import 'firebase/firestore';
 
 import "./style.css";
 
@@ -36,14 +30,39 @@ const EventDetail: React.FC = () => {
   return (
     <IonPage>
       <IonToolbar>
-        <IonButton slot="start">
-          <IonBackButton defaultHref="/home" />
-        </IonButton>
         <IonTitle>{event?.titre}</IonTitle>
       </IonToolbar>
       <IonContent id="contentTest" fullscreen>
-        <h2>{event?.titre}</h2>
-        <p>{event?.description}</p>
+        <img src={event?.photo} alt="" />
+        <section className='event-detail-content'>
+          <h1>{event?.titre}</h1>
+          <p>{event?.date.toDate().toLocaleDateString()}</p>
+          <div className='little-info'>
+            <div>
+              <IonIcon icon={hourglassOutline} size="large"></IonIcon>
+              {event?.duree}
+            </div>
+            <div>
+              <IonIcon icon={bicycleOutline} size="large"></IonIcon>
+              {event?.kilometre} <br />
+            </div>
+            <div>
+              <IonIcon icon={barbellOutline} size="large"></IonIcon>
+              {event?.difficulte}
+            </div>
+            <div>
+              <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
+              {event?.denivele}
+            </div>
+          </div>
+          <p>{event?.description}</p>
+         
+          <p><IonIcon icon={trailSignOutline}></IonIcon> : {event?.itineraire}</p>
+          
+          <p><IonIcon icon={bicycleOutline}></IonIcon> : {event?.typeVelo}</p>
+          <p><IonIcon icon={locationOutline}></IonIcon> : {event?.depart}</p>
+        </section>
+      
       </IonContent>
     </IonPage>
   );

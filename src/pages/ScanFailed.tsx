@@ -1,6 +1,5 @@
 import "./style.css";
-
-import { IonButton, IonPage } from "@ionic/react";
+import { IonButton, IonPage, IonContent, IonToolbar} from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
 const ScanFailed: React.FC = () => {
@@ -9,6 +8,11 @@ const ScanFailed: React.FC = () => {
   return (
     //Page de redirection après validation d'un QR code invalide
     <IonPage>
+      <IonToolbar>
+        Erreur
+      </IonToolbar>
+      <IonContent>
+      <section className="page-message">
       <h1>Nous n'avons pas de réservation active ce jour</h1>
       <IonButton
         onClick={(e) => {
@@ -18,6 +22,9 @@ const ScanFailed: React.FC = () => {
       >
         Retourner à l'accueil
       </IonButton>
+      </section>
+
+      </IonContent>
     </IonPage>
   );
 };
