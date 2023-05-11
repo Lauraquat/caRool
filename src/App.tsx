@@ -13,6 +13,7 @@ import ScanOptions from './pages/ScanOptions';
 import ResaConfirmation from './pages/ResaConfirmation';
 import MesResa from './pages/MesResa';
 import ScanFailed from './pages/ScanFailed';
+import ScanValid from './pages/ScanValid';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -94,6 +95,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/scanOptions">
               <ScanOptions />
+            </Route>
+            <Route path="/scanValid">
+              <ScanValid />
             </Route>
             <Route path="/scanFailed">
               <ScanFailed />

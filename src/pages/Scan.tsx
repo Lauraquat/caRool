@@ -49,18 +49,18 @@ const Scan: React.FC = () => {
       const currentResa = resas.find((resa) => resa.startDate === today);
 
       // On vérifie s'il y a une réservation pour le user sur la journée
-      if (
+      if(
+        currentResa && 
+        result.content == currentResa.hashEnter &&        
+        currentResa.rendu == false){
+        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
+      } else if (
         !currentResa ||
         result.content != currentResa.hashResa ||
         currentResa.userId != user?.uid
       ) {
         navigate.push("/scanFailed");
-      } else if(
-        currentResa && 
-        result.content == currentResa.hashEnter &&        
-        currentResa.rendu == false){
-        navigate.push("/scanOptions", { hashResa: currentResa.hashResa });
-      }else if (
+      } else if (
         result.content == currentResa.hashResa &&
         currentResa.rendu == false &&
         currentResa.userId == user?.uid
