@@ -63,22 +63,31 @@ const Event: React.FC = () => {
                 </IonCardHeader>
                 <IonCardContent class='card-content'>
                   {event.intro}<br />
-                  <div>
-                    <IonIcon icon={hourglassOutline} size="large"></IonIcon>
-                    {event.duree}
-                  </div>
-                  <div>
-                    <IonIcon icon={bicycleOutline} size="large"></IonIcon>
-                    {event.kilometre} <br />
-                  </div>
-                  <div>
-                    <IonIcon icon={barbellOutline} size="large"></IonIcon>
-                    {event.difficulte}
-                  </div>
-                  <div>
-                    <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
-                    {event.denivele}
-                  </div>
+                  {event.duree && (
+                    <div>
+                       <IonIcon icon={hourglassOutline} size="large"></IonIcon>
+                       {event.duree}
+                    </div>
+                  )}
+                    {event.kilometre && ( 
+                     <div>
+                        <IonIcon icon={bicycleOutline} size="large"></IonIcon>
+                        {event.kilometre} <br />
+                     </div>
+                    )}
+                    {event.difficulte && (
+                     <div>
+                      <IonIcon icon={barbellOutline} size="large"></IonIcon>
+                      {event.difficulte}
+                    </div>
+                    )}
+                    {event.denivele && (
+                      <div>
+                       <IonIcon icon={trendingUpOutline} size="large" />
+                       {event.denivele}
+                      </div>
+                    )}
+
                 <IonButton class='cardButton'>En savoir +</IonButton>
               </IonCardContent>
             </IonCard>      

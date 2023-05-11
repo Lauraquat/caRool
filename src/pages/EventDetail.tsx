@@ -38,29 +38,41 @@ const EventDetail: React.FC = () => {
           <h1>{event?.titre}</h1>
           <p>{event?.date.toDate().toLocaleDateString()}</p>
           <div className='little-info'>
-            <div>
-              <IonIcon icon={hourglassOutline} size="large"></IonIcon>
-              {event?.duree}
-            </div>
-            <div>
+            {event?.duree &&(
+              <div>
+                <IonIcon icon={hourglassOutline} size="large"></IonIcon>
+                {event?.duree}
+              </div>
+            )}
+            {event?.kilometre &&(
+              <div>
               <IonIcon icon={bicycleOutline} size="large"></IonIcon>
               {event?.kilometre} <br />
-            </div>
-            <div>
-              <IonIcon icon={barbellOutline} size="large"></IonIcon>
-              {event?.difficulte}
-            </div>
+              </div>
+            )}
+            {event?.difficulte && (
+              <div>
+                <IonIcon icon={barbellOutline} size="large"></IonIcon>
+                {event?.difficulte}
+              </div>
+            )}
+            {event?.denivele && (
             <div>
               <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
               {event?.denivele}
             </div>
+            )}
           </div>
           <p>{event?.description}</p>
-         
-          <p><IonIcon icon={trailSignOutline}></IonIcon> : {event?.itineraire}</p>
-          
+          {event?.itineraire &&(
+            <p><IonIcon icon={trailSignOutline}></IonIcon> : {event?.itineraire}</p>
+          )}
+          {event?.typeVelo &&(
           <p><IonIcon icon={bicycleOutline}></IonIcon> : {event?.typeVelo}</p>
+          )}
+          {event?.depart &&(
           <p><IonIcon icon={locationOutline}></IonIcon> : {event?.depart}</p>
+          )}
         </section>
       
       </IonContent>
