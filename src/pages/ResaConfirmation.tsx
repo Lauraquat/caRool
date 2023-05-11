@@ -48,14 +48,6 @@ const ResaConfirmation: React.FC = () => {
       <IonButton
         onClick={(e) => {
           e.preventDefault();
-          navigate.push('/mesresa');
-        }}
-        >
-        Mes réservations
-      </IonButton>
-      <IonButton
-        onClick={(e) => {
-          e.preventDefault();
           navigate.push("/home");
         }}
         >

@@ -1,4 +1,4 @@
-import { IonButton, IonPage, IonHeader, IonContent } from "@ionic/react";
+import { IonButton, IonPage, IonHeader, IonContent, IonToolbar } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
 import "./style.css";
@@ -9,11 +9,12 @@ const RetourVelo: React.FC = () => {
   return (
     //Page de redirection après validation d'un QR code valide pour rendre le vélo
     <IonPage>
-      <IonHeader></IonHeader>
+      <IonToolbar>Retour velo</IonToolbar>
       <IonContent>
+        <section className="page-message">
         <p>
           Merci d'avoir utilisé caRool. Nous espérons que vous avez passé un bon
-          moment et vous revoir bientôt ! Bisous {/***** VRAIMENT??? *****/}
+          moment et vous revoir bientôt !
         </p>
         <IonButton
           onClick={(e) => {
@@ -31,6 +32,7 @@ const RetourVelo: React.FC = () => {
         >
           Faire une nouvelle réservation
         </IonButton>
+        </section>
       </IonContent>
     </IonPage>
   );

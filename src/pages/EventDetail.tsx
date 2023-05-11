@@ -36,7 +36,7 @@ const EventDetail: React.FC = () => {
         <img src={event?.photo} alt="" />
         <section className='event-detail-content'>
           <h1>{event?.titre}</h1>
-          <p>{event?.date.toDate().toLocaleDateString()}</p>
+          <p>{event?.date.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à {event?.date.toDate().toLocaleTimeString('fr-FR', { hour: 'numeric', minute: 'numeric' })}</p>
           <div className='little-info'>
             {event?.duree &&(
               <div>

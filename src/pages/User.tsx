@@ -29,7 +29,7 @@ const User: React.FC = () => {
             <section className="page-message">
             <IonList>
             <IonButton href="./mesresa">Voir mes reservations</IonButton>
-            <IonButton onClick={logOut}>LogOut</IonButton>
+            <IonButton onClick={logOut}>Se deconnecter</IonButton>
             </IonList>
             </section>
 

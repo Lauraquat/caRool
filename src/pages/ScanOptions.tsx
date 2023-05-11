@@ -48,7 +48,6 @@ const ScanOptions: React.FC = ({ route }: any) => {
       <IonToolbar></IonToolbar>
       <IonContent>
         <section className="page-message">
-        <h1>Bienvenue</h1>
         <p>Vous pouvez accéder à votre réservation. Profitez bien !</p>
         <IonButton
           onClick={(e) => {
@@ -76,7 +75,6 @@ const ScanOptions: React.FC = ({ route }: any) => {
         >
           Retourner à l'accueil
         </IonButton>
-        <p>Hash de la réservation : {hashResa}</p>
         </section>
       </IonContent>
     </IonPage>
