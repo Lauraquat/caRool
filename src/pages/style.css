@@ -5,7 +5,9 @@
     --grey:#e3e3e3; 
 
 }
-
+h1{
+    text-align: center;
+}
 .button{
     /* padding:0 1rem ; */
     width: 100%;
