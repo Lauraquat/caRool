@@ -40,11 +40,11 @@ const BookingConfirmation: React.FC = () => {
       <IonToolbar>
         Booking
       </IonToolbar>
+      <img src="../assets/gif/check.gif" alt="" />
         <IonContent >
           <section className="page-message">
-
-        <h1>Votre réservation à bien été prise en compte.<br/> À très vite !</h1>
-
+          <img className="gif" src="../assets/gif/icons8-check.gif" alt="" />
+          <h1>Votre réservation à bien été prise en compte.<br/> À très vite !</h1>
       <IonButton
         onClick={(e) => {
           e.preventDefault();

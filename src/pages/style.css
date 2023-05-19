@@ -162,6 +162,8 @@ ion-list{
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    align-items: center;
+    padding-top:5rem
 }
 .form-location{
     display: flex;
@@ -174,4 +176,7 @@ ion-list{
 }
 #scan-option{
     top:4rem;
+}
+.gif{
+    width: 20%;
 }
