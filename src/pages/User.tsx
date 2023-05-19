@@ -1,5 +1,5 @@
 import "./style.css";
-import { IonButton, IonPage, IonHeader, IonContent,IonToolbar , IonList} from "@ionic/react";
+import { IonButton, IonPage, IonHeader, IonContent,IonToolbar , IonList, IonIcon} from "@ionic/react";
 import { auth } from "../firebaseConfig";
 import { useHistory } from "react-router-dom";
 
@@ -27,10 +27,9 @@ const User: React.FC = () => {
         </IonHeader>
         <IonContent>
             <section className="page-message">
-            <IonList>
+            <img className="gif" src="../assets/icon/person-outline.svg" alt="" />
             <IonButton href="./myBooking">Voir mes réservations</IonButton>
             <IonButton onClick={logOut}>Se deconnecter</IonButton>
-            </IonList>
             </section>
 
         </IonContent>

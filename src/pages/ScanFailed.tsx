@@ -13,6 +13,7 @@ const ScanFailed: React.FC = () => {
       </IonToolbar>
       <IonContent>
       <section className="page-message">
+      <img className='gif' src="../assets/gif/icons8-cross.gif" alt="" />
       <h1>Nous n'avons pas de réservation active ce jour</h1>
       <IonButton
         onClick={(e) => {

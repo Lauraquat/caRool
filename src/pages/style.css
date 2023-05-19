@@ -163,7 +163,7 @@ ion-list{
     gap: 1rem;
     text-align: center;
     align-items: center;
-    padding-top:5rem
+    padding-top:4rem;
 }
 .form-location{
     display: flex;
@@ -179,4 +179,16 @@ ion-list{
 }
 .gif{
     width: 20%;
+}
+.anim-bike{
+    width: 30%;
+    transform: scaleX(-1);
+    position: relative;
+    animation: roule 4s ease 0s 1 normal ;
+}
+@keyframes roule {
+    0%   { left:-50%; top:0px;}
+    50%  {left:0%; top:0px;}
+    75% { transform-origin: 100% 100%; rotate: 20deg;}
+    100% { left:0px; top:0px;transform-origin: 50% 50%; rotate: 0deg;}
 }

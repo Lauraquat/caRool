@@ -50,8 +50,8 @@ const ScanOptions: React.FC = ({ route }: any) => {
       </IonToolbar>
       <IonContent>
         <section className="page-message">
+        <img className="gif" src="../assets/gif/icons8-check.gif" alt="" />
         <h1>Vous pouvez accéder à votre réservation. <br/> Profitez bien !</h1>
-
         <IonButton
           onClick={(e) => {
             e.preventDefault();

@@ -12,6 +12,7 @@ const ReturnBike: React.FC = () => {
       <IonToolbar>Retour velo</IonToolbar>
       <IonContent>
         <section className="page-message">
+          <img className="anim-bike" src="../assets/icon/logo.svg" alt="" />
         <h1>Merci d'avoir utilisé caRool.</h1>
         <p>
           Nous espérons que vous avez passé un bon

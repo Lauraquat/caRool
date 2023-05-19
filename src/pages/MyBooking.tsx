@@ -73,6 +73,7 @@ const MyBooking: React.FC = () => {
             </IonHeader>
             <IonContent id="contentTest" fullscreen>
               <section className='page-message'>
+                <img className='gif' src="../assets/gif/icons8-cross.gif" alt="" />
                 <h1>
                     Vous n'avez pas de réservation
                 </h1>
@@ -98,6 +99,7 @@ const MyBooking: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent id="content-booking" fullscreen>
+        <h1>Mes réservations</h1>
         <IonList class='py-1'>
         {bookings.map((booking)=>  (
             <IonCard 
