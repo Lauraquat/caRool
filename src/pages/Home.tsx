@@ -81,10 +81,10 @@ const Home: React.FC = () => {
           </IonButton>
         </form>
         <Link to="/register">S'INSCRIRE</Link>
-        <p>Se connecter avec :</p>
-        <button onClick={signInWithGoogle} type="submit" id="google-button">
+        {/* <p>Se connecter avec :</p> */}
+        {/* <button onClick={signInWithGoogle} type="submit" id="google-button">
           <img src="../../assets/icon/google.png" alt="se connecter avec google" />
-        </button>
+        </button> */}
         {/* <IonButton onClick={signInWithFacebook} expand="full" type="submit">
           Se connecter avec facebook
         </IonButton> */}
