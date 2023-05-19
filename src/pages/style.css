@@ -192,3 +192,36 @@ ion-list{
     75% { transform-origin: 100% 100%; rotate: 20deg;}
     100% { left:0px; top:0px;transform-origin: 50% 50%; rotate: 0deg;}
 }
+.password-input{
+    position: relative
+}
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index:10
+  }
+  .error-message {
+    color: red;
+    font-size: 0.8rem;
+  }
+  
+  ion-modal{
+    height: 100%;
+    width: 100%;
+    padding: 50% 1rem;
+  }
+  .modal-password {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 2rem;
+  }
+  .modal-password img{
+    width: 30%;
+  }

@@ -14,7 +14,8 @@ import BookingConfirmation from './pages/BookingConfirmation';
 import MyBooking from './pages/MyBooking';
 import ScanFailed from './pages/ScanFailed';
 import ScanValid from './pages/ScanValid';
-
+import ResetPassword from './pages/ResetPassword';
+import ReturnBike from './pages/ReturnBike';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -36,7 +37,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { userInfo } from 'os';
 import { useCurrentUser } from './hooks/UserHook';
-import ReturnBike from './pages/ReturnBike';
 
 setupIonicReact();
 
@@ -54,6 +54,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/resetPassword">
+              <ResetPassword />
             </Route>
             </IonRouterOutlet>
       </IonReactRouter>
@@ -108,6 +111,7 @@ const App: React.FC = () => {
             <Route path="/bookingConfirmation">
               <BookingConfirmation />
             </Route>
+           
             <Route exact path="/register">
               <Redirect to="/event" />
             </Route>

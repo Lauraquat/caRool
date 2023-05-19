@@ -7,7 +7,8 @@ import {
   IonHeader,
   IonInput,
   IonPage,
-  IonImg
+  IonImg,
+  IonIcon
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import {
@@ -17,11 +18,15 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 
 const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const providerGoogle = new GoogleAuthProvider();
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   // const providerFacebook = new FacebookAuthProvider();
 
   // function signInWithFacebook() {
@@ -32,14 +37,14 @@ const Home: React.FC = () => {
   //       alert("Erreur lors de l'authentification avec facebook");
   //     });
   // }
-  function signInWithGoogle() {
-    signInWithPopup(auth, providerGoogle)
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-        alert("Erreur lors de l'authentification avec google");
-      });
-  }
+  // function signInWithGoogle() {
+  //   signInWithPopup(auth, providerGoogle)
+  //     .then(() => {})
+  //     .catch((error) => {
+  //       console.log(error);
+  //       alert("Erreur lors de l'authentification avec google");
+  //     });
+  // }
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -47,7 +52,7 @@ const Home: React.FC = () => {
       })
       .catch((error) => {
         console.error(error);
-        alert("Erreur lors de l'authentification avec le mail");
+        setErrorMessage("Adresse e-mail ou mot de passe incorrect");
       });
   }
 
@@ -70,15 +75,28 @@ const Home: React.FC = () => {
             placeholder="Email"
             onIonChange={(e: any) => setEmail(e.target.value)}
           />
-          <IonInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            onIonChange={(e: any) => setPassword(e.target.value)}
-            />
+          <div  className="password-input">
+
+         <IonInput
+  name="password"
+  type={showPassword ? 'text' : 'password'}
+  placeholder="Password"
+  onIonChange={(e: any) => setPassword(e.target.value)}
+/>
+<IonIcon
+  className="password-toggle-icon"
+  icon={showPassword ? eyeOffOutline : eyeOutline}
+  onClick={() => setShowPassword(!showPassword)}
+/>
+          </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+
           <IonButton type="submit">
             SE CONNECTER
           </IonButton>
+          <Link to="/resetPassword">Mot de passe oublié ?</Link>
+
         </form>
         <Link to="/register">S'INSCRIRE</Link>
         {/* <p>Se connecter avec :</p> */}
