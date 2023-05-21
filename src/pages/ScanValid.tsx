@@ -21,7 +21,7 @@ const ScanOptions: React.FC = ({ route }: any) => {
 
   function renderBike() {
     const returnBike = query(
-      collection(db, "reservation"),
+      collection(db, "booking"),
       where("hashResa", "==", hashResa)
     );
 
@@ -33,7 +33,7 @@ const ScanOptions: React.FC = ({ route }: any) => {
 
         console.log("bookingId", bookingId);
 
-        return updateDoc(doc(db, "reservation", bookingId), {
+        return updateDoc(doc(db, "booking", bookingId), {
           rendu: true,
         });
       })

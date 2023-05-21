@@ -107,7 +107,7 @@ const Location: React.FC = () => {
 
     //Récupération des réservations en cours avec les critères demandés
     const checkDispo = query(
-      collection(db, "reservation"),
+      collection(db, "booking"),
       where("startDate", "==", startDate),
       where("rendu", "==", false),
       where("genre", "==", genre),
@@ -129,7 +129,7 @@ const Location: React.FC = () => {
   const [userId, setUserId] = useState(user?.uid);
 
   async function getBookings() {
-    const bookingCol = collection(db, "reservation");
+    const bookingCol = collection(db, "booking");
     const bookingSnapshot = await getDocs(bookingCol);
     const bookingLists = bookingSnapshot.docs.map((doc) => {
       const booking = doc.data() as dataBookings;
@@ -148,7 +148,7 @@ const Location: React.FC = () => {
 
   async function addBookings() {
     try {
-      const docRef = await addDoc(collection(db, "reservation"), {
+      const docRef = await addDoc(collection(db, "booking"), {
         genre,
         quantite: 1,
         startDate,

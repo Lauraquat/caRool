@@ -37,14 +37,14 @@ const Home: React.FC = () => {
   //       alert("Erreur lors de l'authentification avec facebook");
   //     });
   // }
-  // function signInWithGoogle() {
-  //   signInWithPopup(auth, providerGoogle)
-  //     .then(() => {})
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("Erreur lors de l'authentification avec google");
-  //     });
-  // }
+  function signInWithGoogle() {
+    signInWithPopup(auth, providerGoogle)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+        alert("Erreur lors de l'authentification avec google");
+      });
+  }
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -100,9 +100,9 @@ const Home: React.FC = () => {
         </form>
         <Link to="/register">S'INSCRIRE</Link>
         {/* <p>Se connecter avec :</p> */}
-        {/* <button onClick={signInWithGoogle} type="submit" id="google-button">
+        <button onClick={signInWithGoogle} type="submit" id="google-button">
           <img src="../../assets/icon/google.png" alt="se connecter avec google" />
-        </button> */}
+        </button>
         {/* <IonButton onClick={signInWithFacebook} expand="full" type="submit">
           Se connecter avec facebook
         </IonButton> */}

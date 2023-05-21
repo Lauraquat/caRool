@@ -1,4 +1,4 @@
-import { IonCard,IonHeader, IonContent, IonPage,IonBackButton, IonTitle, IonCardHeader,IonCardTitle,IonCardSubtitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
+import { IonCard,IonHeader, IonContent, IonPage, IonCardHeader,IonCardTitle, IonToolbar, IonButton, IonCardContent, IonList } from '@ionic/react';
 import { collection, getDocs ,query, where , deleteDoc, doc} from 'firebase/firestore/lite';
 import { db } from '../firebaseConfig';
 import 'firebase/app';
@@ -17,7 +17,7 @@ const MyBooking: React.FC = () => {
     const user = useCurrentUser();
     useEffect(() => {
         async function getBookings() {
-            const bookingCol =collection(db, "reservation")
+            const bookingCol =collection(db, "booking")
             const bookingQuery = query(bookingCol, where("userId", "==", user?.uid || ""));
                 const bookingSnapshot = await getDocs(bookingQuery);
                 const bookingLists = bookingSnapshot.docs.map( doc => {

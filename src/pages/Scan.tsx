@@ -15,7 +15,7 @@ const Scan: React.FC = () => {
   const navigate = useHistory();
 
   async function getBookings() {
-    const bookingCol = collection(db, "reservation");
+    const bookingCol = collection(db, "booking");
     const bookingSnapshot = await getDocs(bookingCol);
     const bookingLists = bookingSnapshot.docs.map((doc) => {
       const booking = doc.data() as dataBookings;

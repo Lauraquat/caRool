@@ -14,7 +14,7 @@ const BookingConfirmation: React.FC = () => {
     const user = useCurrentUser();
     useEffect(() => {
         async function getBookings() {
-            const bookingCol =collection(db, "reservation")
+            const bookingCol =collection(db, "booking")
             const bookingQuery = query(bookingCol, where("userId", "==", user?.uid || ""));
                 const bookingSnapshot = await getDocs(bookingQuery);
                 const bookingLists = bookingSnapshot.docs.map( doc => {
