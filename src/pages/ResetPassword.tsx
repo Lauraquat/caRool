@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { IonContent, IonHeader, IonInput, IonPage, IonImg, IonModal, IonText, IonButton } from "@ionic/react";
+import {
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonPage,
+  IonImg,
+  IonModal,
+  IonText,
+  IonButton,
+} from "@ionic/react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../firebaseConfig";
@@ -29,11 +38,16 @@ const ResetPassword: React.FC = () => {
   }
 
   return (
+    //Page de réinitialisation du mot de passe
     <IonPage>
       <IonHeader></IonHeader>
       <IonContent>
         <section className="log-home">
-          <IonImg class='logo-acceuil' src='../../assets/icon/logoWithTitle.svg' alt='logo ça Rool'></IonImg>           
+          <IonImg
+            class="logo-acceuil"
+            src="../../assets/icon/logoWithTitle.svg"
+            alt="logo ça Rool"
+          ></IonImg>
           <h1 className="title-reset">Réinitialiser votre mot de passe</h1>
           <form
             onSubmit={(e) => {
@@ -53,11 +67,14 @@ const ResetPassword: React.FC = () => {
 
           <IonModal isOpen={showModal}>
             <IonContent>
-                <div className="modal-password">
-              <img src="../assets/icon/envoyer.png" alt="" />
-              <IonText>Votre e-mail de réinitialisation du mot de passe a été envoyé avec succès.</IonText>
-              <IonButton onClick={closeModal}>OK</IonButton>
-                </div>
+              <div className="modal-password">
+                <img src="../assets/icon/envoyer.png" alt="" />
+                <IonText>
+                  Votre e-mail de réinitialisation du mot de passe a été envoyé
+                  avec succès.
+                </IonText>
+                <IonButton onClick={closeModal}>OK</IonButton>
+              </div>
             </IonContent>
           </IonModal>
         </section>

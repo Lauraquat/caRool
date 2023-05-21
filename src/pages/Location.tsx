@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   IonApp,
-  IonBackButton,
-  IonButtons,
   IonButton,
   IonDatetime,
   IonHeader,
@@ -37,15 +35,10 @@ import { useCurrentUser } from "../hooks/UserHook";
 
 import "./style.css";
 
-/* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
-
-/* Optional CSS utils that can be commented out */
 import "@ionic/react/css/padding.css";
 import "@ionic/react/css/float-elements.css";
 import "@ionic/react/css/text-alignment.css";
@@ -107,7 +100,7 @@ const Location: React.FC = () => {
 
     //Récupération des réservations en cours avec les critères demandés
     const checkDispo = query(
-      collection(db, "reservation"),
+      collection(db, "booking"),
       where("startDate", "==", startDate),
       where("rendu", "==", false),
       where("genre", "==", genre),
@@ -126,10 +119,9 @@ const Location: React.FC = () => {
   }, [stock, numberOfBookings]);
 
   const user = useCurrentUser();
-  const [userId, setUserId] = useState(user?.uid);
 
   async function getBookings() {
-    const bookingCol = collection(db, "reservation");
+    const bookingCol = collection(db, "booking");
     const bookingSnapshot = await getDocs(bookingCol);
     const bookingLists = bookingSnapshot.docs.map((doc) => {
       const booking = doc.data() as dataBookings;
@@ -148,7 +140,7 @@ const Location: React.FC = () => {
 
   async function addBookings() {
     try {
-      const docRef = await addDoc(collection(db, "reservation"), {
+      const docRef = await addDoc(collection(db, "booking"), {
         genre,
         quantite: 1,
         startDate,
@@ -164,6 +156,7 @@ const Location: React.FC = () => {
   }
 
   return (
+    //Formulaire de réservation
     <IonApp>
       <IonPage>
         <IonHeader>

@@ -1,12 +1,25 @@
-import { IonContent,IonIcon, IonPage, IonTitle, IonToolbar} from '@ionic/react';
-import { barbellOutline, bicycleOutline, hourglassOutline, trendingUpOutline , trailSignOutline,  locationOutline} from 'ionicons/icons';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { dataEvents } from '../dataBdd';
-import { doc, getDoc } from 'firebase/firestore/lite';
-import { db } from '../firebaseConfig';
-import 'firebase/app';
-import 'firebase/firestore';
+import {
+  IonContent,
+  IonIcon,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import {
+  barbellOutline,
+  bicycleOutline,
+  hourglassOutline,
+  trendingUpOutline,
+  trailSignOutline,
+  locationOutline,
+} from "ionicons/icons";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { dataEvents } from "../dataBdd";
+import { doc, getDoc } from "firebase/firestore/lite";
+import { db } from "../firebaseConfig";
+import "firebase/app";
+import "firebase/firestore";
 
 import "./style.css";
 
@@ -19,8 +32,6 @@ const EventDetail: React.FC = () => {
       const eventDoc = doc(db, "event", id);
       const eventSnapshot = await getDoc(eventDoc);
       if (!eventSnapshot.exists) {
-        // const eventData = eventSnapshot.data() as dataEvents;
-        // setEvent(eventData);
       }
       setEvent(eventSnapshot.data() as dataEvents);
     }
@@ -34,20 +45,30 @@ const EventDetail: React.FC = () => {
       </IonToolbar>
       <IonContent id="contentTest" fullscreen>
         <img src={event?.photo} alt="" />
-        <section className='event-detail-content'>
+        <section className="event-detail-content">
           <h1>{event?.titre}</h1>
-          <p>{event?.date.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à {event?.date.toDate().toLocaleTimeString('fr-FR', { hour: 'numeric', minute: 'numeric' })}</p>
-          <div className='little-info'>
-            {event?.duree &&(
+          <p>
+            {event?.date.toDate().toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}{" "}
+            {event?.date.toDate().toLocaleTimeString("fr-FR", {
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          </p>
+          <div className="little-info">
+            {event?.duree && (
               <div>
                 <IonIcon icon={hourglassOutline} size="large"></IonIcon>
                 {event?.duree}
               </div>
             )}
-            {event?.kilometre &&(
+            {event?.kilometre && (
               <div>
-              <IonIcon icon={bicycleOutline} size="large"></IonIcon>
-              {event?.kilometre} <br />
+                <IonIcon icon={bicycleOutline} size="large"></IonIcon>
+                {event?.kilometre} <br />
               </div>
             )}
             {event?.difficulte && (
@@ -57,24 +78,29 @@ const EventDetail: React.FC = () => {
               </div>
             )}
             {event?.denivele && (
-            <div>
-              <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
-              {event?.denivele}
-            </div>
+              <div>
+                <IonIcon icon={trendingUpOutline} size="large"></IonIcon>
+                {event?.denivele}
+              </div>
             )}
           </div>
           <p>{event?.description}</p>
-          {event?.itineraire &&(
-            <p><IonIcon icon={trailSignOutline}></IonIcon> : {event?.itineraire}</p>
+          {event?.itineraire && (
+            <p>
+              <IonIcon icon={trailSignOutline}></IonIcon> : {event?.itineraire}
+            </p>
           )}
-          {event?.typeVelo &&(
-          <p><IonIcon icon={bicycleOutline}></IonIcon> : {event?.typeVelo}</p>
+          {event?.typeVelo && (
+            <p>
+              <IonIcon icon={bicycleOutline}></IonIcon> : {event?.typeVelo}
+            </p>
           )}
-          {event?.depart &&(
-          <p><IonIcon icon={locationOutline}></IonIcon> : {event?.depart}</p>
+          {event?.depart && (
+            <p>
+              <IonIcon icon={locationOutline}></IonIcon> : {event?.depart}
+            </p>
           )}
         </section>
-      
       </IonContent>
     </IonPage>
   );

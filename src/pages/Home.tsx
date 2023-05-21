@@ -1,5 +1,3 @@
-import "./style.css";
-
 import React, { useState } from "react";
 import {
   IonButton,
@@ -8,43 +6,21 @@ import {
   IonInput,
   IonPage,
   IonImg,
-  IonIcon
+  IonIcon,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
-import {
-  GoogleAuthProvider,
-  // FacebookAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
+import { eyeOffOutline, eyeOutline } from "ionicons/icons";
+
+import "./style.css";
 
 const Home: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const providerGoogle = new GoogleAuthProvider();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // const providerFacebook = new FacebookAuthProvider();
-
-  // function signInWithFacebook() {
-  //   signInWithPopup(auth, providerFacebook)
-  //     .then(() => {})
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("Erreur lors de l'authentification avec facebook");
-  //     });
-  // }
-  // function signInWithGoogle() {
-  //   signInWithPopup(auth, providerGoogle)
-  //     .then(() => {})
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("Erreur lors de l'authentification avec google");
-  //     });
-  // }
   function logIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -57,57 +33,49 @@ const Home: React.FC = () => {
   }
 
   return (
+    //Page d'accueil
     <IonPage>
       <IonHeader></IonHeader>
       <IonContent>
         <section className="log-home">
-
-        <IonImg class='logo-acceuil' src='../../assets/icon/logoWithTitle.svg' alt='logo ça Rool'></IonImg>           
-        <h1 className="title-log">Bienvenue</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            logIn();
-          }}
+          <IonImg
+            class="logo-acceuil"
+            src="../../assets/icon/logoWithTitle.svg"
+            alt="logo ça Rool"
+          ></IonImg>
+          <h1 className="title-log">Bienvenue</h1>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              logIn();
+            }}
           >
-          <IonInput
-            name="email"
-            placeholder="Email"
-            onIonChange={(e: any) => setEmail(e.target.value)}
-          />
-          <div  className="password-input">
+            <IonInput
+              name="email"
+              placeholder="Email"
+              onIonChange={(e: any) => setEmail(e.target.value)}
+            />
+            <div className="password-input">
+              <IonInput
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                onIonChange={(e: any) => setPassword(e.target.value)}
+              />
+              <IonIcon
+                className="password-toggle-icon"
+                icon={showPassword ? eyeOffOutline : eyeOutline}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-         <IonInput
-  name="password"
-  type={showPassword ? 'text' : 'password'}
-  placeholder="Password"
-  onIonChange={(e: any) => setPassword(e.target.value)}
-/>
-<IonIcon
-  className="password-toggle-icon"
-  icon={showPassword ? eyeOffOutline : eyeOutline}
-  onClick={() => setShowPassword(!showPassword)}
-/>
-          </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-
-          <IonButton type="submit">
-            SE CONNECTER
-          </IonButton>
-          <Link to="/resetPassword">Mot de passe oublié ?</Link>
-
-        </form>
-        <Link to="/register">S'INSCRIRE</Link>
-        {/* <p>Se connecter avec :</p> */}
-        {/* <button onClick={signInWithGoogle} type="submit" id="google-button">
-          <img src="../../assets/icon/google.png" alt="se connecter avec google" />
-        </button> */}
-        {/* <IonButton onClick={signInWithFacebook} expand="full" type="submit">
-          Se connecter avec facebook
-        </IonButton> */}
+            <IonButton type="submit">SE CONNECTER</IonButton>
+            <Link to="/resetPassword">Mot de passe oublié ?</Link>
+          </form>
+          <Link to="/register">S'INSCRIRE</Link>
         </section>
-        </IonContent>
+      </IonContent>
     </IonPage>
   );
 };

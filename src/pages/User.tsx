@@ -1,5 +1,11 @@
 import "./style.css";
-import { IonButton, IonPage, IonHeader, IonContent,IonToolbar , IonList, IonIcon} from "@ionic/react";
+import {
+  IonButton,
+  IonPage,
+  IonHeader,
+  IonContent,
+  IonToolbar,
+} from "@ionic/react";
 import { auth } from "../firebaseConfig";
 import { useHistory } from "react-router-dom";
 
@@ -20,19 +26,16 @@ const User: React.FC = () => {
 
   return (
     <IonPage>
-        <IonHeader>
-            <IonToolbar>
-                User page
-            </IonToolbar>
-        </IonHeader>
-        <IonContent>
-            <section className="page-message">
-            <img className="gif" src="../assets/icon/person-outline.svg" alt="" />
-            <IonButton href="./myBooking">Voir mes réservations</IonButton>
-            <IonButton onClick={logOut}>Se deconnecter</IonButton>
-            </section>
-
-        </IonContent>
+      <IonHeader>
+        <IonToolbar>User page</IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <section className="page-message">
+          <img className="gif" src="../assets/icon/person-outline.svg" alt="" />
+          <IonButton href="./myBooking">Voir mes réservations</IonButton>
+          <IonButton onClick={logOut}>Se déconnecter</IonButton>
+        </section>
+      </IonContent>
     </IonPage>
   );
 };

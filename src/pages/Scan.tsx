@@ -1,5 +1,3 @@
-import "./style.css";
-
 import { IonPage, useIonViewDidEnter } from "@ionic/react";
 import { useState } from "react";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
@@ -10,12 +8,14 @@ import { dataBookings } from "../dataBdd";
 import moment from "moment";
 import { getAuth } from "@firebase/auth";
 
+import "./style.css";
+
 const Scan: React.FC = () => {
   const [qrCode, setQrCode] = useState("");
   const navigate = useHistory();
 
   async function getBookings() {
-    const bookingCol = collection(db, "reservation");
+    const bookingCol = collection(db, "booking");
     const bookingSnapshot = await getDocs(bookingCol);
     const bookingLists = bookingSnapshot.docs.map((doc) => {
       const booking = doc.data() as dataBookings;
@@ -46,13 +46,16 @@ const Scan: React.FC = () => {
       const today = moment().format("YYYY-MM-DD");
 
       //On cherche toutes les réservations qui ont une startDate correspondante à today
-      const currentBooking = bookings.find((booking) => booking.startDate === today);
+      const currentBooking = bookings.find(
+        (booking) => booking.startDate === today
+      );
 
       // On vérifie s'il y a une réservation pour le user sur la journée
-      if(
-        currentBooking && 
-        result.content == currentBooking.hashEnter &&        
-        currentBooking.rendu == false){
+      if (
+        currentBooking &&
+        result.content == currentBooking.hashEnter &&
+        currentBooking.rendu == false
+      ) {
         navigate.push("/scanOptions", { hashResa: currentBooking.hashResa });
       } else if (
         !currentBooking ||

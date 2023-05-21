@@ -13,27 +13,27 @@ const ReturnBike: React.FC = () => {
       <IonContent>
         <section className="page-message">
           <img className="anim-bike" src="../assets/icon/logo.svg" alt="" />
-        <h1>Merci d'avoir utilisé caRool.</h1>
-        <p>
-          Nous espérons que vous avez passé un bon
-          moment et vous revoir bientôt !
-        </p>
-        <IonButton
-          onClick={(e) => {
-            e.preventDefault();
-            navigate.push("/home");
-          }}
-        >
-          Retourner à l'accueil
-        </IonButton>
-        <IonButton
-          onClick={(e) => {
-            e.preventDefault();
-            navigate.push("/location");
-          }}
-        >
-          Faire une nouvelle réservation
-        </IonButton>
+          <h1>Merci d'avoir utilisé ÇaRool.</h1>
+          <p>
+            Nous espérons que vous avez passé un bon moment.
+            <br />À bientôt !
+          </p>
+          <IonButton
+            onClick={(e) => {
+              e.preventDefault();
+              navigate.push("/home");
+            }}
+          >
+            Retourner à l'accueil
+          </IonButton>
+          <IonButton
+            onClick={(e) => {
+              e.preventDefault();
+              navigate.push("/location");
+            }}
+          >
+            Faire une nouvelle réservation
+          </IonButton>
         </section>
       </IonContent>
     </IonPage>

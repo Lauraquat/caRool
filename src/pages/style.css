@@ -1,62 +1,73 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    --green:#203533; 
-    --grey:#e3e3e3; 
+    --green: #203533;
+    --grey: #e3e3e3;
 
 }
-h1{
+
+h1 {
     text-align: center;
 }
-.button{
-    /* padding:0 1rem ; */
+
+.button {
     width: 100%;
 }
 
-.cardHeader{
+.cardHeader {
     padding: 0 !important;
 }
-.cardImg{
+
+.cardImg {
     max-height: 10rem;
     width: 100%;
     overflow: hidden;
 }
-.cardContent{
+
+.cardContent {
     padding: 1rem !important;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-.cardButton{
+
+.cardButton {
     padding: 0;
     margin: 0;
 }
+
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
     padding: 1rem;
-  }
+}
 
 ion-card img {
     min-width: -webkit-fill-available;
 }
-ion-button{
+
+ion-button {
     color: white;
     text-transform: none;
 }
-.p-1{
+
+.p-1 {
     padding-top: 1rem;
 }
-.mt-1{
+
+.mt-1 {
     margin-top: 1rem
 }
-ion-content{
+
+ion-content {
     padding: 1rem;
 }
-.py-1{
+
+.py-1 {
     padding: 0 1.5rem;
 }
-ion-list{
+
+ion-list {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -65,7 +76,8 @@ ion-list{
 .mt-5 {
     margin-top: 5rem;
 }
-.logoUser{
+
+.logoUser {
     position: absolute;
     top: 50%;
     right: 1rem;
@@ -73,147 +85,183 @@ ion-list{
     transform: translate(0, -50%);
 }
 
-ion-card-content{
+ion-card-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 1rem;
     align-items: center;
 }
-ion-card-title{
+
+ion-card-title {
     font-size: 1.4rem;
     text-align: center;
 }
-ion-card-content div{
+
+ion-card-content div {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     gap: 0.5rem;
 }
-.event-detail-content{
+
+.event-detail-content {
     padding: 0 2rem 2rem 2rem;
 }
-.little-info{
+
+.little-info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:0 2rem;
+    gap: 0 2rem;
     justify-content: space-between;
 }
-.little-info div{
+
+.little-info div {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
-ion-card-subtitle{
+
+ion-card-subtitle {
     padding: 1rem 1rem 0 1rem;
 }
-.event-detail-content{
+
+.event-detail-content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-#content-booking{
+
+#content-booking {
     top: 1rem;
 }
-#content-booking ion-card{
+
+#content-booking ion-card {
     padding: 1rem;
 }
-ion-list{
+
+ion-list {
     margin-bottom: 1rem !important;
 }
-.logo-acceuil{
-   height: 5rem;
+
+.logo-acceuil {
+    height: 5rem;
 }
-.log-home{
-     padding: 5rem 1rem;
-     display: flex;
-     align-items: center;
-     flex-direction: column;
-     gap: 1rem;
+
+.log-home {
+    padding: 5rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
 }
-.title-log{
+
+.title-log {
     font-weight: 900;
     text-align: center;
     text-transform: uppercase;
     font-size: 2rem;
     color: var(--green);
 }
-.log-home form{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+
+.log-home form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
-.log-home ion-input{
-   background-color: var(--grey);
-   border-radius: 50px;
-}
-#google-button{
-    background-color: white;
+
+.log-home ion-input {
+    background-color: var(--grey);
     border-radius: 50px;
-    padding: 0.5rem;
-    width: 4rem;
-    border: solid var(--grey) 0.5px;
 }
-.page-message{
+
+.page-message {
     display: flex;
     padding: 1rem;
     flex-direction: column;
     gap: 1rem;
     text-align: center;
     align-items: center;
-    padding-top:4rem;
+    padding-top: 4rem;
 }
-.form-location{
+
+.form-location {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.bike-dispo{
+
+.bike-dispo {
     background: var(--grey);
     padding: 1rem;
 }
-#scan-option{
-    top:4rem;
+
+#scan-option {
+    top: 4rem;
 }
-.gif{
+
+.gif {
     width: 20%;
 }
-.anim-bike{
+
+.anim-bike {
     width: 30%;
     transform: scaleX(-1);
     position: relative;
-    animation: roule 4s ease 0s 1 normal ;
+    animation: roule 4s ease 0s 1 normal;
 }
+
 @keyframes roule {
-    0%   { left:-50%; top:0px;}
-    50%  {left:0%; top:0px;}
-    75% { transform-origin: 100% 100%; rotate: 20deg;}
-    100% { left:0px; top:0px;transform-origin: 50% 50%; rotate: 0deg;}
+    0% {
+        left: -50%;
+        top: 0px;
+    }
+
+    50% {
+        left: 0%;
+        top: 0px;
+    }
+
+    75% {
+        transform-origin: 100% 100%;
+        rotate: 20deg;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+        transform-origin: 50% 50%;
+        rotate: 0deg;
+    }
 }
-.password-input{
+
+.password-input {
     position: relative
 }
+
 .password-toggle-icon {
     position: absolute;
     top: 50%;
     right: 1rem;
     transform: translateY(-50%);
     cursor: pointer;
-    z-index:10
-  }
-  .error-message {
+    z-index: 10
+}
+
+.error-message {
     color: red;
     font-size: 0.8rem;
-  }
-  
-  ion-modal{
+}
+
+ion-modal {
     height: 100%;
     width: 100%;
     padding: 50% 1rem;
-  }
-  .modal-password {
+}
+
+.modal-password {
     display: flex;
     padding: 1rem;
     flex-direction: column;
@@ -221,7 +269,8 @@ ion-list{
     justify-content: center;
     height: 100%;
     gap: 2rem;
-  }
-  .modal-password img{
+}
+
+.modal-password img {
     width: 30%;
-  }
+}
