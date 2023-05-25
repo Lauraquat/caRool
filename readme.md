@@ -8,8 +8,9 @@ OU si besoin
 • ionic serve
 
 # Lancer affichage sur mobile
-• Brancher tel en mode dev (spam clic dans à propos) avec câble de transfert
-• Activer le mode débogage USB dans les options développeurs
-• En ligne de commande, dans projet, mettre : « ionic capacitor run android »
-• Sélectionner le bon device
-• Attendre que la connexion se fasse
+    • Brancher le télephone en mode développeur (spam clic dans à propos) avec un câble de transfert
+    • Autoriser le transfert de fichiers sur le téléphone
+    • Activer le mode débogage USB dans les options développeurs
+    • En ligne de commande, dans le projet, faire la commande : « ionic capacitor run android »
+    • Sélectionner le device
+    • Attendre que la connexion se fasse
