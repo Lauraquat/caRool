@@ -1,22 +1,10 @@
 import { IonButton, IonPage, IonContent, IonToolbar } from "@ionic/react";
-import { useHistory, useLocation } from "react-router-dom";
-import { dataBookings } from "../dataBdd";
+import { useHistory } from "react-router-dom";
 import React from "react";
-import {
-  collection,
-  updateDoc,
-  doc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore/lite";
-import { db } from "../firebaseConfig";
 import "firebase/firestore";
 
-const ScanOptions: React.FC = ({ route }: any) => {
+const ScanValid: React.FC = ({ route }: any) => {
   const navigate = useHistory();
-  const location = useLocation<dataBookings>();
-  const hashResa = location.state?.hashResa;
 
   return (
     //Page de redirection après validation d'un QR code valide
@@ -42,4 +30,4 @@ const ScanOptions: React.FC = ({ route }: any) => {
   );
 };
 
-export default ScanOptions;
+export default ScanValid;
