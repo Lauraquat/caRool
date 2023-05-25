@@ -54,8 +54,8 @@ const Location: React.FC = () => {
   const [startDate, setStartDate] = useState(now);
   const [genre, setGender] = useState("homme");
   const [typeBike, setTypeBike] = useState("vtt");
-  const [hashResa, setHashBooking] = useState(hashRandom().toString());
-  const [hashEnter, setHashEnter] = useState(
+  const [hashResa] = useState(hashRandom().toString());
+  const [hashEnter] = useState(
     hashString("Nous avons bien pris en compte votre demande").toString()
   );
   const [stock, setStock] = useState(0);
@@ -138,6 +138,7 @@ const Location: React.FC = () => {
     fetchUsers();
   }, []);
 
+  //Enregistrement de la réservation dans la BDD
   async function addBookings() {
     try {
       const docRef = await addDoc(collection(db, "booking"), {
