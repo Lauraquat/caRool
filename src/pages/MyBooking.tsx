@@ -37,7 +37,7 @@ const MyBooking: React.FC = () => {
       const bookingCol = collection(db, "booking");
       const bookingQuery = query(
         bookingCol,
-        where("userId", "==", user?.uid || "")
+        where("userId", "==", user?.uid || ""), where("rendu", "==", false)
       );
       const bookingSnapshot = await getDocs(bookingQuery);
       const bookingLists = bookingSnapshot.docs.map((doc) => {
